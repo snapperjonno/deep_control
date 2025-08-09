@@ -1,6 +1,6 @@
 <!-- Auto-converted from DOCX to Markdown with figure filenames -->
 
-MIDI CONTROLLER SYSTEM – OVERVIEW:
+MIDI CONTROLLER SYSTEM - OVERVIEW:
 
 This system is a sophisticated hybrid analogue/digital MIDI controller, integrated into a custom electric guitar body, and designed for performance control of external effect units and plugins. Built around an Adafruit Feather ESP-32 v2, it combines traditional analogue potentiometers with digital switching, encoder navigation and display feedback for total control in a compact footprint.
 
@@ -24,7 +24,7 @@ Only make the exact change I ask for, and nothing more.
 
 Never overwrite or remove existing, working code unless explicitly told to.
 
-Preserve all confirmed pin mappings and setup calls—no pin changes or SPI/init tweaks unless asked.
+Preserve all confirmed pin mappings and setup calls-no pin changes or SPI/init tweaks unless asked.
 
 Use the minimal diff approach: change only the lines or logic specified, leave everything else intact.
 
@@ -32,7 +32,7 @@ Ensure display updates happen exactly where and when requested
 
 Ask for clarification if a requested change is ambiguous, rather than guessing.
 
-Always be 100% certain before asserting—if not absolutely sure, say so rather than guess.
+Always be 100% certain before asserting-if not absolutely sure, say so rather than guess.
 
 Refer back to elements I’ve already approved (pin assignments, divider values, function names) rather than re-introducing old defaults
 
@@ -42,7 +42,7 @@ Whenever I need tunable values (positions, sizes, colors), expose them as #defin
 
 For real-time displays, draw static elements once in setup(), then update only the changing regions in loop() to avoid flicker and text artifacts
 
-Don’t reorganize or refactor code unless it’s directly called for—keep all code as “lean” as possible around my requested features
+Don’t reorganize or refactor code unless it’s directly called for-keep all code as “lean” as possible around my requested features
 
 HARDWARE OVERVIEW:
 
@@ -59,7 +59,7 @@ T8014A-SEBQ-H | Used to increment or decrement preset number, navigate menus and
 RVFM JR5404 | Used to send all fader CCs at once on a short press, or to enter/exit Setup or Play modes on a long press. |
 | Adafruit 1.14" 240×135 TFT (ST7789) | Shows system state, preset selection, fader values, etc. |
 | MIDI Din | Outputs MIDI data for a wired connection to external hardware |
-| Power slide switch | Turns the system ON and OFF – connected to the Feather’s ENable pin |
+| Power slide switch | Turns the system ON and OFF - connected to the Feather’s ENable pin |
 
 FEATHER PIN CONNECTIONS:
 
@@ -70,7 +70,7 @@ FEATHER PIN CONNECTIONS:
 | TFT\_CS (Chip Select) | 14 | D14 | Top | Next to TFT\_DC | Digital output; pull high when inactive |
 | TFT\_DC (Data/Command) | 15 | D15 | Top | Next to TFT\_CS | Digital output; select data/command |
 | MIDI OUT TX | 8 | TX | Top | Keep away from analog | TX pin -to- 220Ω inline resistor -→ - DIN pin 5 -→ - 3.3v.DIN pin 4 = GNDDIN pin 2 = not connectedDOUBLE CHECK ONLINE! |
-| Encoder A (A) | 7 | RX | Top | Close to encoder | Use code for internal pullup – pinmode (7, INPUT\_PULLUP);add series resistor: ENCA -→ - 220Ω resistor -→ - pin 7optional 0.1µF filter after the resistor to ground for encoder smoothing and emi/rfi rejection. Not fitting it = better edge-speed response |
+| Encoder A (A) | 7 | RX | Top | Close to encoder | Use code for internal pullup - pinmode (7, INPUT\_PULLUP);add series resistor: ENCA -→ - 220Ω resistor -→ - pin 7optional 0.1µF filter after the resistor to ground for encoder smoothing and emi/rfi rejection. Not fitting it = better edge-speed response |
 | Encoder B (B) | 33 | D33 | Top | Close to encoder | As above except pin 33 |
 | MUX Control A | 27 ADC2 | D27 | Top | Group with MUX lines | 220Ω series between mux a/b/c and pin;100nF bypass ceramic cap between mux vcc and 3.3v |
 | MUX Control B | 22 | SDA | Top | Group with MUX lines | As above, only one bypass on vcc line as above |
@@ -151,7 +151,7 @@ All display screens in Setup mode have white filled triangles in fixed positions
 
 Navigate the menus by turning the encoder or using the toggle switch, then press the encoder button to confirm selections
 
-No MIDI data is sent during ‘SETUP’ mode (unless MIDI channel or fader and stomp CC number selections need to be – confirm this during coding!)
+No MIDI data is sent during ‘SETUP’ mode (unless MIDI channel or fader and stomp CC number selections need to be - confirm this during coding!)
 
 SETUP MODE - UI FLOW LIST SHOWN IN ORDER OF MENU ITEMS (menu items are ‘round robin’):
 
@@ -227,7 +227,7 @@ setup_battery
 
 Default display screen shown after a long press of the ‘mirror’ button in ‘Play’ mode
 
-Uses the Use ESP32's built-in milliVolt reading for accuracy – analogReadMilliVolts – to display current battery level
+Uses the Use ESP32's built-in milliVolt reading for accuracy - analogReadMilliVolts - to display current battery level
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -241,7 +241,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_led
 
-![Figure 2 – setup_led screen](images/Figure 2 – setup_led screen.png)
+![Figure 2 - setup_led screen](images/Figure 2 - setup_led screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -257,7 +257,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_led_brightness
 
-![Figure 2.2 – setup_LED brightness screen](images/Figure 2.2 – setup_LED brightness screen.png)
+![Figure 2.2 - setup_LED brightness screen](images/Figure 2.2 - setup_LED brightness screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -271,7 +271,7 @@ Encoder button press confirms the brightness selection and saves it to memory (E
 
 setup_tft
 
-![Figure 3 – setup_tft screen](images/Figure 3 – setup_tft screen.png)
+![Figure 3 - setup_tft screen](images/Figure 3 - setup_tft screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -287,7 +287,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_tft_brightness
 
-![Figure 3.2 – setup_TFT brightness screen](images/Figure 3.2 – setup_TFT brightness screen.png)
+![Figure 3.2 - setup_TFT brightness screen](images/Figure 3.2 - setup_TFT brightness screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -301,7 +301,7 @@ Encoder button press confirms the brightness selection and saves it to memory (E
 
 setup_mode
 
-![Figure 4 – setup_mode screen](images/Figure 4 – setup_mode screen.png)
+![Figure 4 - setup_mode screen](images/Figure 4 - setup_mode screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -317,7 +317,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_mode_select
 
-![Figure 4.2 – setup_mode_select screen](images/Figure 4.2 – setup_mode_select screen.png)
+![Figure 4.2 - setup_mode_select screen](images/Figure 4.2 - setup_mode_select screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -333,23 +333,23 @@ Upon selection of a preset mode, the system must immediately initialize all Fade
 
 | Mode | Control | CC \# | Parameter Controlled | Default Label |
 | --- | --- | --- | --- | --- |
-| 0–127 | Fader 1 | 20 | User-defined (Full MIDI Learn) | — |
-| 0–127 | Fader 2 | 21 | User-defined (Full MIDI Learn) | — |
-| 0–127 | Fader 3 | 22 | User-defined (Full MIDI Learn) | — |
-| 0–127 | Fader 4 | 23 | User-defined (Full MIDI Learn) | — |
-| 0–127 | Stomp 1 | 80 | User-defined (Full MIDI Learn) | — |
-| 0–127 | Stomp 2 | 81 | User-defined (Full MIDI Learn) | — |
-| 0–127 | Stomp 3 | 82 | User-defined (Full MIDI Learn) | — |
-| 0–127 | Stomp 4 | 83 | User-defined (Full MIDI Learn) | — |
+| 0-127 | Fader 1 | 20 | User-defined (Full MIDI Learn) | - |
+| 0-127 | Fader 2 | 21 | User-defined (Full MIDI Learn) | - |
+| 0-127 | Fader 3 | 22 | User-defined (Full MIDI Learn) | - |
+| 0-127 | Fader 4 | 23 | User-defined (Full MIDI Learn) | - |
+| 0-127 | Stomp 1 | 80 | User-defined (Full MIDI Learn) | - |
+| 0-127 | Stomp 2 | 81 | User-defined (Full MIDI Learn) | - |
+| 0-127 | Stomp 3 | 82 | User-defined (Full MIDI Learn) | - |
+| 0-127 | Stomp 4 | 83 | User-defined (Full MIDI Learn) | - |
 |  |  |  |  |  |
-| 1–128 | Fader 1 | 20 | User-defined (Full MIDI Learn) | — |
-| 1–128 | Fader 2 | 21 | User-defined (Full MIDI Learn) | — |
-| 1–128 | Fader 3 | 22 | User-defined (Full MIDI Learn) | — |
-| 1–128 | Fader 4 | 23 | User-defined (Full MIDI Learn) | — |
-| 1–128 | Stomp 1 | 80 | User-defined (Full MIDI Learn) | — |
-| 1–128 | Stomp 2 | 81 | User-defined (Full MIDI Learn) | — |
-| 1–128 | Stomp 3 | 82 | User-defined (Full MIDI Learn) | — |
-| 1–128 | Stomp 4 | 83 | User-defined (Full MIDI Learn) | — |
+| 1-128 | Fader 1 | 20 | User-defined (Full MIDI Learn) | - |
+| 1-128 | Fader 2 | 21 | User-defined (Full MIDI Learn) | - |
+| 1-128 | Fader 3 | 22 | User-defined (Full MIDI Learn) | - |
+| 1-128 | Fader 4 | 23 | User-defined (Full MIDI Learn) | - |
+| 1-128 | Stomp 1 | 80 | User-defined (Full MIDI Learn) | - |
+| 1-128 | Stomp 2 | 81 | User-defined (Full MIDI Learn) | - |
+| 1-128 | Stomp 3 | 82 | User-defined (Full MIDI Learn) | - |
+| 1-128 | Stomp 4 | 83 | User-defined (Full MIDI Learn) | - |
 |  |  |  |  |  |
 | Kemper | Fader 1 | 72 | Amplifier Gain | Amp Gain |
 | Kemper | Fader 2 | 4 | Pitch Pedal | Pitch |
@@ -360,14 +360,14 @@ Upon selection of a preset mode, the system must immediately initialize all Fade
 | Kemper | Stomp 3 | 22 | Post-amp FX Slot X | FX Slot X |
 | Kemper | Stomp 4 | 24 | Post-amp Modulation Slot | Mod Slot |
 |  |  |  |  |  |
-| Axe-FX | Fader 1 | 20 | Manual – no fixed parameter | CC20 |
-| Axe-FX | Fader 2 | 21 | Manual – no fixed parameter | CC21 |
-| Axe-FX | Fader 3 | 22 | Manual – no fixed parameter | CC22 |
-| Axe-FX | Fader 4 | 23 | Manual – no fixed parameter | CC23 |
-| Axe-FX | Stomp 1 | 80 | Manual – no fixed parameter | CC80 |
-| Axe-FX | Stomp 2 | 81 | Manual – no fixed parameter | CC81 |
-| Axe-FX | Stomp 3 | 82 | Manual – no fixed parameter | CC82 |
-| Axe-FX | Stomp 4 | 83 | Manual – no fixed parameter | CC83 |
+| Axe-FX | Fader 1 | 20 | Manual - no fixed parameter | CC20 |
+| Axe-FX | Fader 2 | 21 | Manual - no fixed parameter | CC21 |
+| Axe-FX | Fader 3 | 22 | Manual - no fixed parameter | CC22 |
+| Axe-FX | Fader 4 | 23 | Manual - no fixed parameter | CC23 |
+| Axe-FX | Stomp 1 | 80 | Manual - no fixed parameter | CC80 |
+| Axe-FX | Stomp 2 | 81 | Manual - no fixed parameter | CC81 |
+| Axe-FX | Stomp 3 | 82 | Manual - no fixed parameter | CC82 |
+| Axe-FX | Stomp 4 | 83 | Manual - no fixed parameter | CC83 |
 
 Updated Setup UI Flow
 
@@ -393,7 +393,7 @@ Re-selecting the same mode does not reload defaults or labels.
 
 setup_mirror
 
-![Figure 5 – setup_mirror screen](images/Figure 5 – setup_mirror screen.png)
+![Figure 5 - setup_mirror screen](images/Figure 5 - setup_mirror screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -409,7 +409,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_mirror_select
 
-![Figure 5.2 – setup_mirror_select screen](images/Figure 5.2 – setup_mirror_select screen.png)
+![Figure 5.2 - setup_mirror_select screen](images/Figure 5.2 - setup_mirror_select screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -417,7 +417,7 @@ the next row shows the next_m_delay in seconds using OpenSans_SemiBold14pt (to b
 
 The bottom row shows the centred text ‘select mirror delay’ in OpenSans_SemiBold14pt.
 
-Encoder turn or toggle switch adjusts the delay time value for m_delay (range 0 (OFF) – 3.0 seconds) and displays it on the screen in seconds to one decimal place, eg ‘1.2 sec’
+Encoder turn or toggle switch adjusts the delay time value for m_delay (range 0 (OFF) - 3.0 seconds) and displays it on the screen in seconds to one decimal place, eg ‘1.2 sec’
 
 m_delay is a value that sets how long the delay time is to the nearest 1/10th of a second between short pressing the mirror button and midi data being sent to update all the current fader potentiometer positions
 
@@ -425,7 +425,7 @@ Encoder button press confirms the mirror delay time and saves it to memory (EEPR
 
 setup_MIDI_CH
 
-![Figure 6 – setup_MIDI_CH screen](images/Figure 6 – setup_MIDI_CH screen.png)
+![Figure 6 - setup_MIDI_CH screen](images/Figure 6 - setup_MIDI_CH screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -443,7 +443,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_MIDI_CH_select
 
-![Figure 6.2 – setup_MIDI_CH_select screen](images/Figure 6.2 – setup_MIDI_CH_select screen.png)
+![Figure 6.2 - setup_MIDI_CH_select screen](images/Figure 6.2 - setup_MIDI_CH_select screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -459,7 +459,7 @@ Encoder button press confirms which midi output to change the MIDI channel value
 
 setup_MIDI_CH_confirmation
 
-![Figure 6.3 – setup_MIDI_CH_confirmation screen](images/Figure 6.3 – setup_MIDI_CH_confirmation screen.png)
+![Figure 6.3 - setup_MIDI_CH_confirmation screen](images/Figure 6.3 - setup_MIDI_CH_confirmation screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -473,7 +473,7 @@ Encoder button press confirms the BLE/DIN MIDI channel selection for that output
 
 setup_fader_labels
 
-![Figure 7 – setup_fader_labels screen](images/Figure 7 – setup_fader_labels screen.png)
+![Figure 7 - setup_fader_labels screen](images/Figure 7 - setup_fader_labels screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -489,7 +489,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_fader_labels_select
 
-![Figure 7.2 – setup_fader_labels_select screen](images/Figure 7.2 – setup_fader_labels_select screen.png)
+![Figure 7.2 - setup_fader_labels_select screen](images/Figure 7.2 - setup_fader_labels_select screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -505,7 +505,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_FADER_labels_list
 
-![Figure 7.3 – Setup_FADER_labels_list screen](images/Figure 7.3 – Setup_FADER_labels_list screen.png)
+![Figure 7.3 - Setup_FADER_labels_list screen](images/Figure 7.3 - Setup_FADER_labels_list screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -529,7 +529,7 @@ Encoder button press makes the currently displayed ‘fader_labels_list’ item 
 
 Setup_FADER_labels_custom
 
-![Figure 7.4 – Setup_FADER_labels_custom screen](images/Figure 7.4 – Setup_FADER_labels_custom screen.png)
+![Figure 7.4 - Setup_FADER_labels_custom screen](images/Figure 7.4 - Setup_FADER_labels_custom screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -561,7 +561,7 @@ header_text = ‘setup’ with horizontal lines either side
 
 Next row shows the current ‘custom_fader_labels_list’ value in OpenSans_SemiBold14pt (to be confirmed during testing), in white.
 
-The bottom row shows three options – ‘select’, ‘edit’ and ‘delete’ in OpenSans_SemiBold14pt. ‘select’ is in green and is the currently selected option, the other two in white.
+The bottom row shows three options - ‘select’, ‘edit’ and ‘delete’ in OpenSans_SemiBold14pt. ‘select’ is in green and is the currently selected option, the other two in white.
 
 Encoder turn or toggle switch scrolls through the three round robin options on the display by turning each on green in turn, while the rest stay white
 
@@ -593,7 +593,7 @@ If encoder button is pressed on ‘confirm delete?’, remove that custom label 
 
 setup_stomp_labels
 
-![Figure 8 – setup_stomp_labels screen](images/Figure 8 – setup_stomp_labels screen.png)
+![Figure 8 - setup_stomp_labels screen](images/Figure 8 - setup_stomp_labels screen.png)
 
 Exactly the same as setup_fader_labels (paragraph 7) except:
 
@@ -603,7 +603,7 @@ F1, F2, F3 and F4 become S1, S2, S3 and S4
 
 setup_stomp_labels_select
 
-![Figure 8.2 – setup_stomp_labels_select screen](images/Figure 8.2 – setup_stomp_labels_select screen.png)
+![Figure 8.2 - setup_stomp_labels_select screen](images/Figure 8.2 - setup_stomp_labels_select screen.png)
 
 Exactly the same as setup_fader_labels_select (paragraph 7.2) except:
 
@@ -613,7 +613,7 @@ F1, F2, F3 and F4 become S1, S2, S3 and S4
 
 setup_STOMP_labels_list
 
-![Figure 8.3 – Setup_STOMP_labels_list screen](images/Figure 8.3 – Setup_STOMP_labels_list screen.png)
+![Figure 8.3 - Setup_STOMP_labels_list screen](images/Figure 8.3 - Setup_STOMP_labels_list screen.png)
 
 Exactly the same as setup_FADER_labels_list (paragraph 7.3) except:
 
@@ -623,7 +623,7 @@ Exactly the same as setup_FADER_labels_list (paragraph 7.3) except:
 
 Setup_STOMP_labels_custom
 
-![Figure 8.4 – Setup_STOMP_labels_custom screen](images/Figure 8.4 – Setup_STOMP_labels_custom screen.png)
+![Figure 8.4 - Setup_STOMP_labels_custom screen](images/Figure 8.4 - Setup_STOMP_labels_custom screen.png)
 
 Exactly the same as Setup_FADER_labels_custom (paragraph 7.4) except:
 
@@ -659,7 +659,7 @@ If encoder button is pressed on ‘confirm delete?’, remove that custom label 
 
 setup_fader_CC
 
-![Figure 9 – setup_fader_CC screen](images/Figure 9 – setup_fader_CC screen.png)
+![Figure 9 - setup_fader_CC screen](images/Figure 9 - setup_fader_CC screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -677,7 +677,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_fader_CC_select
 
-![Figure 9.2 – setup_fader_CC_select screen](images/Figure 9.2 – setup_fader_CC_select screen.png)
+![Figure 9.2 - setup_fader_CC_select screen](images/Figure 9.2 - setup_fader_CC_select screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -687,9 +687,9 @@ Next row shows current CC numbers assigned to each fader, with values directly b
 
 Default fader CC numbers are:
 
-F1 – 20
+F1 - 20
 
-F2 – 21
+F2 - 21
 
 F3 - 22
 
@@ -703,7 +703,7 @@ Encoder button press confirms the fader CC number to change the label for and di
 
 Setup_FADER_CC_confirmation
 
-Figure 9.3  – setup_FADER_CC_confirmation screen
+Figure 9.3  - setup_FADER_CC_confirmation screen
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -717,7 +717,7 @@ Encoder button press confirms the MIDI CC selection for that fader and saves it 
 
 setup_stomp_cc
 
-![Figure 10 – setup_stomp_CC screen](images/Figure 10 – setup_stomp_CC screen.png)
+![Figure 10 - setup_stomp_CC screen](images/Figure 10 - setup_stomp_CC screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -735,7 +735,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_stomp_CC_select
 
-![Figure 10.2 – setup_stomp_CC_select screen](images/Figure 10.2 – setup_stomp_CC_select screen.png)
+![Figure 10.2 - setup_stomp_CC_select screen](images/Figure 10.2 - setup_stomp_CC_select screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -745,9 +745,9 @@ Next row shows current CC numbers assigned to each stomp, with values directly b
 
 Default stomp CC numbers are:
 
-S1 – 80
+S1 - 80
 
-S2 – 81
+S2 - 81
 
 S3 - 82
 
@@ -761,7 +761,7 @@ Encoder button press confirms the stomp CC number to change the label for and di
 
 Setup_STOMP_CC_confirmation
 
-![Figure 10.3 – setup_STOMP_CC_select screen](images/Figure 10.3 – setup_STOMP_CC_select screen.png)
+![Figure 10.3 - setup_STOMP_CC_select screen](images/Figure 10.3 - setup_STOMP_CC_select screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -775,7 +775,7 @@ Encoder button press confirms the MIDI CC selection for that stomp and saves it 
 
 setup_stomp_type
 
-![Figure 11 – setup_stomp_type screen](images/Figure 11 – setup_stomp_type screen.png)
+![Figure 11 - setup_stomp_type screen](images/Figure 11 - setup_stomp_type screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -793,7 +793,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_stomp_type_select
 
-![Figure 11.2 – setup_stomp_type_select screen](images/Figure 11.2 – setup_stomp_type_select screen.png)
+![Figure 11.2 - setup_stomp_type_select screen](images/Figure 11.2 - setup_stomp_type_select screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -803,9 +803,9 @@ Next row shows current stomp switch type assigned to each stomp, with values dir
 
 Default stomp types are:
 
-S1 – TG
+S1 - TG
 
-S2 – TG
+S2 - TG
 
 S3 - TG
 
@@ -819,7 +819,7 @@ Encoder button press confirms the stomp number to change the type for and displa
 
 Setup_STOMP_type_confirmation
 
-![Figure 11.3 – setup_STOMP_type_confirmation screen](images/Figure 11.3 – setup_STOMP_type_confirmation screen.png)
+![Figure 11.3 - setup_STOMP_type_confirmation screen](images/Figure 11.3 - setup_STOMP_type_confirmation screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -837,9 +837,9 @@ SYSTEM STATE / EEPROM STORAGE / LOOKUP TABLES
 | --- | --- | --- | --- | --- |
 | LED brightness | LED\_brightness\_value | 2.2 | 0 (off) -20 (max) | Logarithmic scale, 0-100% brightness Default = 100% |
 | TFT brightness | TFT\_brightness\_value | 3.2 | 0 (off) -20 (max) | Logarithmic scale, 0-100% brightness Default = 100% |
-| Preset mode | preset\_mode\_list | 4.2.5, 4.2.6 | List – 0-127, 1-128, Axe-FX etc | See section 13 for details. See section 13.2 for the preset\_mode\_list contents Default = 001-127 |
+| Preset mode | preset\_mode\_list | 4.2.5, 4.2.6 | List - 0-127, 1-128, Axe-FX etc | See section 13 for details. See section 13.2 for the preset\_mode\_list contents Default = 001-127 |
 | current preset | current\_preset\_value |  | Depends on preset mode selected | See preset handling in ‘PLAY’ mode section Default = 001 |
-| ‘Mirror’ delay | mirror\_delay\_value | 5.25/5.26/5.27 | 0 – 3.0 seconds | Value in seconds to one decimal place Default = 0.5 seconds |
+| ‘Mirror’ delay | mirror\_delay\_value | 5.25/5.26/5.27 | 0 - 3.0 seconds | Value in seconds to one decimal place Default = 0.5 seconds |
 | BLE MIDI channel | ble\_midi\_ch\_value | 6.3.5 | 00-127 | Default = channel 01 |
 | DIN MIDI channel | din\_midi\_ch\_value | 6.3.5 | 00-127 | Default = channel 01 |
 | Fader labels | fader\_labels\_list | 7.3.3 | fader 1 fader 2 fader 3 fader 4 distortion gain drive fuzz modulation phaser flanger rotary tremolo wah ring mod delay delay time delay fbck reverb pitch \*custom\* | Default = fader 1 fader 2 fader 3 fader 4 |
@@ -879,7 +879,7 @@ The controller will work differently depending upon the MODE selected in the SET
 
 All preset numbers are ‘round robin’
 
-All fader CC values are 0-127, scaled to 0.0 – 10 on the display
+All fader CC values are 0-127, scaled to 0.0 - 10 on the display
 
 All stomps are CC value 0 for OFF and 127 for ON
 
@@ -1169,85 +1169,85 @@ KEMPER CC handling:
 
 Kemper has no true MIDI learn facility, You must manually assign CCs to functions (e.g. Wah, Volume, Morph) in System > MIDI Settings
 
-Create a list in the SETUP / MODE menu under Kemper for the user to select from the Kemper Profiler — Default MIDI CC Mapping defaults listed below to assign CC numbers to each fader and stomp button.
+Create a list in the SETUP / MODE menu under Kemper for the user to select from the Kemper Profiler - Default MIDI CC Mapping defaults listed below to assign CC numbers to each fader and stomp button.
 
-Expression Pedals & Wah/Volume – good for POTENTIOMETERS
+Expression Pedals & Wah/Volume - good for POTENTIOMETERS
 
-CC 1 – Wah Pedal Level
+CC 1 - Wah Pedal Level
 
-CC 4 – Pitch Pedal
+CC 4 - Pitch Pedal
 
-CC 7 – Volume Pedal
+CC 7 - Volume Pedal
 
-Effect Toggles (On/Off) – good for STOMP BUTTONS
+Effect Toggles (On/Off) - good for STOMP BUTTONS
 
-CC 16 – Toggle all stomps A–D, X, MOD
+CC 16 - Toggle all stomps A-D, X, MOD
 
-CC 17 – Stomp A – first effect block before the amp stack
+CC 17 - Stomp A - first effect block before the amp stack
 
-CC 18 – Stomp B – second effect block before the amp stack
+CC 18 - Stomp B - second effect block before the amp stack
 
-CC 19 – Stomp C – third effect block before the amp stack
+CC 19 - Stomp C - third effect block before the amp stack
 
-CC 20 – Stomp D– fourth effect block before the amp stack
+CC 20 - Stomp D- fourth effect block before the amp stack
 
-CC 22 – Stomp X - "X" is the first effect block after the amp stack. Can be any effect type (delay, EQ, chorus, etc.)
+CC 22 - Stomp X - "X" is the first effect block after the amp stack. Can be any effect type (delay, EQ, chorus, etc.)
 
-CC 24 – Stomp MOD - "MOD" is the second post-amp FX slot. Often used for modulation (flanger, phaser, rotary), but can be any effect
+CC 24 - Stomp MOD - "MOD" is the second post-amp FX slot. Often used for modulation (flanger, phaser, rotary), but can be any effect
 
-Delay & Reverb – good for STOMP BUTTONS
+Delay & Reverb - good for STOMP BUTTONS
 
-CC 26 – Delay bypass - without tails
+CC 26 - Delay bypass - without tails
 
-CC 27 – Delay bypass - keep tails
+CC 27 - Delay bypass - keep tails
 
-CC 28 – Reverb bypass - without tails
+CC 28 - Reverb bypass - without tails
 
-CC 29 – Reverb bypass - keep tails
+CC 29 - Reverb bypass - keep tails
 
 Tap & Tuner - good for STOMP BUTTONS
 
-CC 30 – Tap Tempo
+CC 30 - Tap Tempo
 
-CC 31 – Tuner on/off
+CC 31 - Tuner on/off
 
-Performance Mode (multi-rig) – handles by encoder and toggle switch so probably not needed. If required use STOMP BUTTONS
+Performance Mode (multi-rig) - handles by encoder and toggle switch so probably not needed. If required use STOMP BUTTONS
 
-CC 48 – Next Performance index
+CC 48 - Next Performance index
 
-CC 49 – Previous Performance index
+CC 49 - Previous Performance index
 
-CC 50–54 – Select Slot 1–5 in current Performance
+CC 50-54 - Select Slot 1-5 in current Performance
 
-Expression Pedal Assignments for Modulation – good for POTENTIOMETERS
+Expression Pedal Assignments for Modulation - good for POTENTIOMETERS
 
-CC 68 – Delay Mix
+CC 68 - Delay Mix
 
-CC 69 – Delay Feedback
+CC 69 - Delay Feedback
 
-CC 70 – Reverb Mix
+CC 70 - Reverb Mix
 
-CC 71 – Reverb Time
+CC 71 - Reverb Time
 
-CC 72 – Amplifier Gain
+CC 72 - Amplifier Gain
 
 USE THESE DEFAULTS ON FIRST SELECTING THE KEMPER MODE - user may change them via the SETUP menu:
 
-FADER 1 - CC 72 – Amplifier Gain
+FADER 1 - CC 72 - Amplifier Gain
 
-FADER 2 - CC 4 – Pitch Pedal
+FADER 2 - CC 4 - Pitch Pedal
 
-FADER 3 - CC 69 – Delay Feedback
+FADER 3 - CC 69 - Delay Feedback
 
-FADER 4 - CC 71 – Reverb Time
+FADER 4 - CC 71 - Reverb Time
 
-STOMP 1 - CC 17 – Stomp A
+STOMP 1 - CC 17 - Stomp A
 
-STOMP 2 - CC 18 – Stomp B
+STOMP 2 - CC 18 - Stomp B
 
-STOMP 3 - CC 22 – Stomp X
+STOMP 3 - CC 22 - Stomp X
 
-STOMP 4 - CC 24 – Stomp MOD
+STOMP 4 - CC 24 - Stomp MOD
 
 AXE-FX PRESET HANDLING:
 
@@ -1257,13 +1257,13 @@ Axe-FX Preset Ranges by Model:
 
 | Model | Number of Presets | PC Range | Notes |
 | --- | --- | --- | --- |
-| Axe-FX II | 384 | 0–383 | Banked via CC0/32 (optional) |
-| Axe-FX III | 512 | 0–511 | Default, stored in 2 banks of 256 |
-| FM3 / FM9 | 512 | 0–511 | Same as Axe-FX III |
+| Axe-FX II | 384 | 0-383 | Banked via CC0/32 (optional) |
+| Axe-FX III | 512 | 0-511 | Default, stored in 2 banks of 256 |
+| FM3 / FM9 | 512 | 0-511 | Same as Axe-FX III |
 
 🧠 Important Notes:
 
-The MIDI PC spec only supports 0–127 per message.
+The MIDI PC spec only supports 0-127 per message.
 
 To access >128 presets, Fractal uses Bank Select:
 
@@ -1271,13 +1271,13 @@ CC 0 (Bank MSB) and/or CC 32 (Bank LSB)
 
 Example:
 
-Bank Select MSB = 1 → Presets 128–255
+Bank Select MSB = 1 → Presets 128-255
 
-Bank Select MSB = 2 → Presets 256–383
+Bank Select MSB = 2 → Presets 256-383
 
-Bank Select MSB = 3 → Presets 384–511
+Bank Select MSB = 3 → Presets 384-511
 
-You must send Bank Select first, then Program Change (PC 0–127) to access full range.
+You must send Bank Select first, then Program Change (PC 0-127) to access full range.
 
 ✅ Implementation Summary
 
@@ -1387,7 +1387,7 @@ BIAS-FX PRESET HANDLING:
 
 Similar to the Kemper and Axe-fx UI, but uses BANKs (A-D) and PRESETS (1-128) using the following logic:
 
-uint8_t bank = pcValue / 128;uint8_t preset = (pcValue % 128) + 1;sendControlChange(0, bank, midiChannel);  // Bank Select MSBsendProgramChange(preset - 1, midiChannel); // PC is 0–127
+uint8_t bank = pcValue / 128;uint8_t preset = (pcValue % 128) + 1;sendControlChange(0, bank, midiChannel);  // Bank Select MSBsendProgramChange(preset - 1, midiChannel); // PC is 0-127
 
 The BIAS-FX_DEFAULT screen ![BIAS-FX_DEFAULT SCREEN](images/BIAS-FX_DEFAULT SCREEN.png)
 
@@ -1417,7 +1417,7 @@ returns to BIAS -FX_DEFAULT SCREEN after 5000ms delay if no interaction is detec
 
 SHORT pressing the encoder button once
 
-sends the corresponding MIDI CC 0 = bank (0–3)
+sends the corresponding MIDI CC 0 = bank (0-3)
 
 returns to the BIAS-FX_DEFAULT SCREEN with bank letter updated
 
@@ -1486,12 +1486,12 @@ SLIDE FADERS
 | Behavior | Description |
 | --- | --- |
 | 4 slide pots | Each mapped to a MIDI CC number (user defined via the setup menu) |
-| Trigger condition | Only sends MIDI data when physically moved, changing at least 3–4 value steps (to prevent jitter). |
+| Trigger condition | Only sends MIDI data when physically moved, changing at least 3-4 value steps (to prevent jitter). |
 | Display feedback | Screen display to be confirmed |
 | LEDs | On at all times, brightness configurable in setup. |
 | MIDI Output | Sends CC value of position to defined channel (DIN & BLE). |
 
-STOMP SWITCHES (1–4)
+STOMP SWITCHES (1-4)
 
 | Feature | Description |
 | --- | --- |
@@ -1503,7 +1503,7 @@ STOMP SWITCHES (1–4)
 | CC Assignment | Global (not per preset), editable via setup. |
 | LEDs | None associated. |
 
-TOGGLE SWITCH (ON–OFF–ON Momentary)
+TOGGLE SWITCH (ON-OFF-ON Momentary)
 
 | Direction | Function |
 | --- | --- |
@@ -1584,7 +1584,7 @@ Support long press mirror button to switch between Setup/Play modes
 
 Implement EEPROM-based persistence for all configurable parameters
 
-Support MIDI OUT via DIN and BLE, with selectable channel (00–127)
+Support MIDI OUT via DIN and BLE, with selectable channel (00-127)
 
 Interface with all specified hardware components: faders, stomp switches, encoder, toggle switch, mirror button, display
 
@@ -1592,7 +1592,7 @@ Use Adafruit Feather ESP32 v2 and adhere to specified pin mappings and electrica
 
 Optimize TFT screen updates to redraw only changed pixels to minimize flicker
 
-Implement preset mode management for at least 4 external systems: Generic 0–127, 1–128, Kemper, Axe-FX
+Implement preset mode management for at least 4 external systems: Generic 0-127, 1-128, Kemper, Axe-FX
 
 ### Should Have
 
@@ -1720,8 +1720,8 @@ package "Hardware Interfaces" {
 | preset\_mode | uint8\_t | Mode ID | 0 |
 | fader\_label\_fN | string | Label for each fader F1-F4 | As defined |
 | stomp\_label\_sN | string | Label for each stomp S1-S4 | As defined |
-| fader\_cc\_fN | uint8\_t | MIDI CC for each fader | 20–23 |
-| stomp\_cc\_sN | uint8\_t | MIDI CC for each stomp | 80–83 |
+| fader\_cc\_fN | uint8\_t | MIDI CC for each fader | 20-23 |
+| stomp\_cc\_sN | uint8\_t | MIDI CC for each stomp | 80-83 |
 | stomp\_type\_sN | string | TG or MO type | TG |
 | custom\_fader\_labels | string[] | User-defined fader labels | [] |
 | custom\_stomp\_labels | string[] | User-defined stomp labels | [] |
@@ -1853,7 +1853,7 @@ Setup_Fader_Label_Delete --> Setup_Fader_Label_Edit : Back
 
 Setup_Fader_Label_Delete --> Setup_Fader_Label_List : Confirm Delete
 
-' Stomp Labels – mirrors fader label flow
+' Stomp Labels - mirrors fader label flow
 
 Setup_Stomp_Labels --> Setup_Stomp_Label_Select : Encoder Press
 
@@ -2013,7 +2013,7 @@ All MUX input buttons (stomps, encoder, toggle, mirror) are read via a selectMux
 
 Each fader should use a 1kΩ + 10nF RC filter, per analog input protection and smoothing.
 
-The TFT backlight and LED brightness are both controlled via PWM and must be scaled logarithmically from 0–20.
+The TFT backlight and LED brightness are both controlled via PWM and must be scaled logarithmically from 0-20.
 
 ### Display Redraw Strategy
 
