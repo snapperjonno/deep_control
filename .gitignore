@@ -1,0 +1,37 @@
+# Arduino build files
+*.ino.cpp
+*.ino.d
+*.ino.elf
+*.ino.bin
+*.ino.hex
+
+# Compiled object files
+*.o
+*.obj
+*.elf
+*.map
+*.a
+*.d
+
+# Precompiled libraries
+*.lib
+
+# Arduino IDE build folder
+/build/
+*.pyc
+
+# Backup files
+*~
+*.bak
+*.tmp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# VS Code settings (optional)
+.vscode/
+
+# PlatformIO build directories (if you use it later)
+.pio/
