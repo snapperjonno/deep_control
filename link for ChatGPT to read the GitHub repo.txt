@@ -1,1 +1,9 @@
+here's my GitHub repo, read docs/Markdown_chat_synopsis.md which is the source of truth for my guitar midi controller project. 
+https://github.com/snapperjonno/deep_control.git
+
+The images are in the docs/images folder
+
+If you are getting 503 errors try this link to the manifest:
 https://raw.githubusercontent.com/snapperjonno/deep_control/main/repo_manifest.json
+
+Please confirm you can read everything?
