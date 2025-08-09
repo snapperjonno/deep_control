@@ -1,0 +1,1 @@
+https://raw.githubusercontent.com/snapperjonno/deep_control/main/repo_manifest.json
