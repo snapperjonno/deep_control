@@ -223,7 +223,7 @@ SETUP MODE - UI FLOW DETAILS:
 
 setup_battery
 
-![figure 1 - setup_battery screen](images/figure 1 - setup_battery screen.png)
+![figure 1 - setup_battery screen](images/figure%201%20-%20setup_battery%20screen.png)
 
 Default display screen shown after a long press of the ‘mirror’ button in ‘Play’ mode
 
@@ -241,7 +241,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_led
 
-![Figure 2 - setup_led screen](images/Figure 2 - setup_led screen.png)
+![Figure 2 - setup_led screen](images/Figure%202%20-%20setup_led%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -257,7 +257,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_led_brightness
 
-![Figure 2.2 - setup_LED brightness screen](images/Figure 2.2 - setup_LED brightness screen.png)
+![Figure 2.2 - setup_LED brightness screen](images/Figure%202.2%20-%20setup_LED%20brightness%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -271,7 +271,7 @@ Encoder button press confirms the brightness selection and saves it to memory (E
 
 setup_tft
 
-![Figure 3 - setup_tft screen](images/Figure 3 - setup_tft screen.png)
+![Figure 3 - setup_tft screen](images/Figure%203%20-%20setup_tft%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -287,7 +287,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_tft_brightness
 
-![Figure 3.2 - setup_TFT brightness screen](images/Figure 3.2 - setup_TFT brightness screen.png)
+![Figure 3.2 - setup_TFT brightness screen](images/Figure%203.2%20-%20setup_TFT%20brightness%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -301,7 +301,7 @@ Encoder button press confirms the brightness selection and saves it to memory (E
 
 setup_mode
 
-![Figure 4 - setup_mode screen](images/Figure 4 - setup_mode screen.png)
+![Figure 4 - setup_mode screen](images/Figure%204%20-%20setup_mode%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -317,7 +317,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_mode_select
 
-![Figure 4.2 - setup_mode_select screen](images/Figure 4.2 - setup_mode_select screen.png)
+![Figure 4.2 - setup_mode_select screen](images/Figure%204.2%20-%20setup_mode_select%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -393,7 +393,7 @@ Re-selecting the same mode does not reload defaults or labels.
 
 setup_mirror
 
-![Figure 5 - setup_mirror screen](images/Figure 5 - setup_mirror screen.png)
+![Figure 5 - setup_mirror screen](images/Figure%205%20-%20setup_mirror%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -409,7 +409,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_mirror_select
 
-![Figure 5.2 - setup_mirror_select screen](images/Figure 5.2 - setup_mirror_select screen.png)
+![Figure 5.2 - setup_mirror_select screen](images/Figure%205.2%20-%20setup_mirror_select%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -425,7 +425,7 @@ Encoder button press confirms the mirror delay time and saves it to memory (EEPR
 
 setup_MIDI_CH
 
-![Figure 6 - setup_MIDI_CH screen](images/Figure 6 - setup_MIDI_CH screen.png)
+![Figure 6 - setup_MIDI_CH screen](images/Figure%206%20-%20setup_MIDI_CH%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -443,7 +443,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_MIDI_CH_select
 
-![Figure 6.2 - setup_MIDI_CH_select screen](images/Figure 6.2 - setup_MIDI_CH_select screen.png)
+![Figure 6.2 - setup_MIDI_CH_select screen](images/Figure%206.2%20-%20setup_MIDI_CH_select%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -459,7 +459,7 @@ Encoder button press confirms which midi output to change the MIDI channel value
 
 setup_MIDI_CH_confirmation
 
-![Figure 6.3 - setup_MIDI_CH_confirmation screen](images/Figure 6.3 - setup_MIDI_CH_confirmation screen.png)
+![Figure 6.3 - setup_MIDI_CH_confirmation screen](images/Figure%206.3%20-%20setup_MIDI_CH_confirmation%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -473,7 +473,7 @@ Encoder button press confirms the BLE/DIN MIDI channel selection for that output
 
 setup_fader_labels
 
-![Figure 7 - setup_fader_labels screen](images/Figure 7 - setup_fader_labels screen.png)
+![Figure 7 - setup_fader_labels screen](images/Figure%207%20-%20setup_fader_labels%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -489,7 +489,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_fader_labels_select
 
-![Figure 7.2 - setup_fader_labels_select screen](images/Figure 7.2 - setup_fader_labels_select screen.png)
+![Figure 7.2 - setup_fader_labels_select screen](images/Figure%207.2%20-%20setup_fader_labels_select%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -505,7 +505,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_FADER_labels_list
 
-![Figure 7.3 - Setup_FADER_labels_list screen](images/Figure 7.3 - Setup_FADER_labels_list screen.png)
+![Figure 7.3 - Setup_FADER_labels_list screen](images/Figure%207.3%20-%20Setup_FADER_labels_list%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -529,7 +529,7 @@ Encoder button press makes the currently displayed ‘fader_labels_list’ item 
 
 Setup_FADER_labels_custom
 
-![Figure 7.4 - Setup_FADER_labels_custom screen](images/Figure 7.4 - Setup_FADER_labels_custom screen.png)
+![Figure 7.4 - Setup_FADER_labels_custom screen](images/Figure%207.4%20-%20Setup_FADER_labels_custom%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -555,7 +555,7 @@ Setup_FADER_labels_edit
 
 If an existing user created custom label is selected on the Setup_FADER_labels_list screen, display the Setup_FADER_labels_edit screen:
 
-![Figure 7.5 - Setup_FADER_labels_edit screen](images/Figure 7.5 - Setup_FADER_labels_edit screen.png)
+![Figure 7.5 - Setup_FADER_labels_edit screen](images/Figure%207.5%20-%20Setup_FADER_labels_edit%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -575,7 +575,7 @@ If encoder button is pressed on ‘delete’ go to the Setup_FADER_labels_delete
 
 Setup_FADER_labels_delete
 
-![Figure 7.6 - Setup_FADER_labels_delete screen](images/Figure 7.6 - Setup_FADER_labels_delete screen.png)
+![Figure 7.6 - Setup_FADER_labels_delete screen](images/Figure%207.6%20-%20Setup_FADER_labels_delete%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -593,7 +593,7 @@ If encoder button is pressed on ‘confirm delete?’, remove that custom label 
 
 setup_stomp_labels
 
-![Figure 8 - setup_stomp_labels screen](images/Figure 8 - setup_stomp_labels screen.png)
+![Figure 8 - setup_stomp_labels screen](images/Figure%208%20-%20setup_stomp_labels%20screen.png)
 
 Exactly the same as setup_fader_labels (paragraph 7) except:
 
@@ -603,7 +603,7 @@ F1, F2, F3 and F4 become S1, S2, S3 and S4
 
 setup_stomp_labels_select
 
-![Figure 8.2 - setup_stomp_labels_select screen](images/Figure 8.2 - setup_stomp_labels_select screen.png)
+![Figure 8.2 - setup_stomp_labels_select screen](images/Figure%208.2%20-%20setup_stomp_labels_select%20screen.png)
 
 Exactly the same as setup_fader_labels_select (paragraph 7.2) except:
 
@@ -613,7 +613,7 @@ F1, F2, F3 and F4 become S1, S2, S3 and S4
 
 setup_STOMP_labels_list
 
-![Figure 8.3 - Setup_STOMP_labels_list screen](images/Figure 8.3 - Setup_STOMP_labels_list screen.png)
+![Figure 8.3 - Setup_STOMP_labels_list screen](images/Figure%208.3%20-%20Setup_STOMP_labels_list%20screen.png)
 
 Exactly the same as setup_FADER_labels_list (paragraph 7.3) except:
 
@@ -623,7 +623,7 @@ Exactly the same as setup_FADER_labels_list (paragraph 7.3) except:
 
 Setup_STOMP_labels_custom
 
-![Figure 8.4 - Setup_STOMP_labels_custom screen](images/Figure 8.4 - Setup_STOMP_labels_custom screen.png)
+![Figure 8.4 - Setup_STOMP_labels_custom screen](images/Figure%208.4%20-%20Setup_STOMP_labels_custom%20screen.png)
 
 Exactly the same as Setup_FADER_labels_custom (paragraph 7.4) except:
 
@@ -633,7 +633,7 @@ Setup_STOMP_labels_edit
 
 If an existing user created custom label is selected on the Setup_STOMP_labels_list screen, display the Setup_STOMP_labels_edit screen:
 
-![Figure 7.5 - Setup_STOMP_labels_edit screen](images/Figure 7.5 - Setup_STOMP_labels_edit screen.png)
+![Figure 7.5 - Setup_STOMP_labels_edit screen](images/Figure%207.5%20-%20Setup_STOMP_labels_edit%20screen.png)
 
 Exactly the same as Setup_FADER_labels_edit (paragraph 7.5) except:
 
@@ -649,7 +649,7 @@ If encoder button is pressed on ‘delete’ go to the Setup_STOMP_labels_delete
 
 Setup_STOMP_labels_delete
 
-![Figure 8.6 - Setup_STOMP_labels_delete screen](images/Figure 8.6 - Setup_STOMP_labels_delete screen.png)
+![Figure 8.6 - Setup_STOMP_labels_delete screen](images/Figure%208.6%20-%20Setup_STOMP_labels_delete%20screen.png)
 
 Exactly the same as Setup_FADER_labels_delete (paragraph 7.6) except:
 
@@ -659,7 +659,7 @@ If encoder button is pressed on ‘confirm delete?’, remove that custom label 
 
 setup_fader_CC
 
-![Figure 9 - setup_fader_CC screen](images/Figure 9 - setup_fader_CC screen.png)
+![Figure 9 - setup_fader_CC screen](images/Figure%209%20-%20setup_fader_CC%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -677,7 +677,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_fader_CC_select
 
-![Figure 9.2 - setup_fader_CC_select screen](images/Figure 9.2 - setup_fader_CC_select screen.png)
+![Figure 9.2 - setup_fader_CC_select screen](images/Figure%209.2%20-%20setup_fader_CC_select%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -717,7 +717,7 @@ Encoder button press confirms the MIDI CC selection for that fader and saves it 
 
 setup_stomp_cc
 
-![Figure 10 - setup_stomp_CC screen](images/Figure 10 - setup_stomp_CC screen.png)
+![Figure 10 - setup_stomp_CC screen](images/Figure%2010%20-%20setup_stomp_CC%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -735,7 +735,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_stomp_CC_select
 
-![Figure 10.2 - setup_stomp_CC_select screen](images/Figure 10.2 - setup_stomp_CC_select screen.png)
+![Figure 10.2 - setup_stomp_CC_select screen](images/Figure%2010.2%20-%20setup_stomp_CC_select%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -761,7 +761,7 @@ Encoder button press confirms the stomp CC number to change the label for and di
 
 Setup_STOMP_CC_confirmation
 
-![Figure 10.3 - setup_STOMP_CC_select screen](images/Figure 10.3 - setup_STOMP_CC_select screen.png)
+![Figure 10.3 - setup_STOMP_CC_select screen](images/Figure%2010.3%20-%20setup_STOMP_CC_select%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -775,7 +775,7 @@ Encoder button press confirms the MIDI CC selection for that stomp and saves it 
 
 setup_stomp_type
 
-![Figure 11 - setup_stomp_type screen](images/Figure 11 - setup_stomp_type screen.png)
+![Figure 11 - setup_stomp_type screen](images/Figure%2011%20-%20setup_stomp_type%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -793,7 +793,7 @@ long press on the mirror button returns into ‘PLAY’ mode from ‘SETUP’ mo
 
 setup_stomp_type_select
 
-![Figure 11.2 - setup_stomp_type_select screen](images/Figure 11.2 - setup_stomp_type_select screen.png)
+![Figure 11.2 - setup_stomp_type_select screen](images/Figure%2011.2%20-%20setup_stomp_type_select%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -819,7 +819,7 @@ Encoder button press confirms the stomp number to change the type for and displa
 
 Setup_STOMP_type_confirmation
 
-![Figure 11.3 - setup_STOMP_type_confirmation screen](images/Figure 11.3 - setup_STOMP_type_confirmation screen.png)
+![Figure 11.3 - setup_STOMP_type_confirmation screen](images/Figure%2011.3%20-%20setup_STOMP_type_confirmation%20screen.png)
 
 header_text = ‘setup’ with horizontal lines either side
 
@@ -909,7 +909,7 @@ Loopy
 
 Program Change (PC) messages 0-127 change presets 0-127 on the external unit
 
-The 0-127_DEFAULT screen ![0-127_DEFAULT SCREEN](images/0-127_DEFAULT SCREEN.png)
+The 0-127_DEFAULT screen ![0-127_DEFAULT SCREEN](images/0-127_DEFAULT%20SCREEN.png)
 
 shows title “- preset -“
 
@@ -1009,7 +1009,7 @@ HELIX PRESET HANDLING:
 
 Program Change (PC) messages 0-127 change presets 1-128 on the external unit
 
-The HELIX_DEFAULT screen ![HELIX_DEFAULT SCREEN](images/HELIX_DEFAULT SCREEN.png)
+The HELIX_DEFAULT screen ![HELIX_DEFAULT SCREEN](images/HELIX_DEFAULT%20SCREEN.png)
 
 shows title “- preset -“
 
@@ -1105,7 +1105,7 @@ sendProgramChange(pc, midiChannel);
 
 So the display will show and be able to change both performance numbers (1-26) and slot numbers (1-5)
 
-The KEMPER_DEFAULT screen ![KEMPER_DEFAULT SCREEN](images/KEMPER_DEFAULT SCREEN.png)
+The KEMPER_DEFAULT screen ![KEMPER_DEFAULT SCREEN](images/KEMPER_DEFAULT%20SCREEN.png)
 
 shows title “- preset -“
 
@@ -1115,7 +1115,7 @@ left column has “PERF” with the current performance number below (1-26)
 
 right column has “SLOT” with the current slot number below (1-5).
 
-Turning the encoder - ![PERFORMANCE SCREEN](images/PERFORMANCE SCREEN.png)
+Turning the encoder - ![PERFORMANCE SCREEN](images/PERFORMANCE%20SCREEN.png)
 
 shows title “- performance -“
 
@@ -1299,7 +1299,7 @@ CC 0 with bankMSB
 
 PC with value pc
 
-The AXE-FX_DEFAULT screen ![AXE-FX_DEFAULT SCREEN](images/AXE-FX_DEFAULT SCREEN.png)
+The AXE-FX_DEFAULT screen ![AXE-FX_DEFAULT SCREEN](images/AXE-FX_DEFAULT%20SCREEN.png)
 
 shows two columns:
 
@@ -1307,7 +1307,7 @@ left column has “PRESET” with the current preset number below (0-383 OR 0-51
 
 right column has “SCENE” with the current slot number below (1-5).
 
-Turning the encoder - ![AXE-FX_PRESET SCREEN](images/AXE-FX_PRESET SCREEN.png)
+Turning the encoder - ![AXE-FX_PRESET SCREEN](images/AXE-FX_PRESET%20SCREEN.png)
 
 shows title “- preset -“
 
@@ -1389,7 +1389,7 @@ Similar to the Kemper and Axe-fx UI, but uses BANKs (A-D) and PRESETS (1-128) us
 
 uint8_t bank = pcValue / 128;uint8_t preset = (pcValue % 128) + 1;sendControlChange(0, bank, midiChannel);  // Bank Select MSBsendProgramChange(preset - 1, midiChannel); // PC is 0-127
 
-The BIAS-FX_DEFAULT screen ![BIAS-FX_DEFAULT SCREEN](images/BIAS-FX_DEFAULT SCREEN.png)
+The BIAS-FX_DEFAULT screen ![BIAS-FX_DEFAULT SCREEN](images/BIAS-FX_DEFAULT%20SCREEN.png)
 
 shows two columns:
 
@@ -1397,7 +1397,7 @@ left column has “BANK” with the current bank letter number below (A-D)
 
 right column has “PRESET” with the current preset number below (1-128).
 
-Turning the encoder - ![BIAS-FX_PRESET SCREEN](images/BIAS-FX_PRESET SCREEN.png)
+Turning the encoder - ![BIAS-FX_PRESET SCREEN](images/BIAS-FX_PRESET%20SCREEN.png)
 
 shows title “- preset -“
 
