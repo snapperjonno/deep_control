@@ -18,6 +18,7 @@ namespace module_manager {
     mux_module::update,
     encoder_module::update,
     mirror_module::update,
+    setup_module::update,
     mode_manager::update,
     display_module::update
   };

@@ -1,10 +1,7 @@
-// File: encoder_module.h
-//
-// encoder_module.h: Declares encoder module interface.
-// IMPORTANT: Do NOT modify this file.
+// File: src/encoder_module.h
 #pragma once
 
 namespace encoder_module {
-  void begin();  // Setup encoder pins
-  void update(); // Poll encoder rotation
+  void begin();   // Setup encoder pins + seed mux states
+  void update();  // Poll rotation, encoder press (via mux), and toggle (via mux)
 }

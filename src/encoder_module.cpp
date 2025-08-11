@@ -1,40 +1,85 @@
-// File: encoder_module.cpp
-//
-// encoder_module.cpp: Handles quadrature encoder reading and value updates.
-// IMPORTANT: Do NOT modify this file.
-
+// =============================
+// File: src/encoder_module.cpp
+// =============================
 #include "encoder_module.h"
 #include <Arduino.h>
-#include "pinmap_module.h"  // Use central pinmap
+#include "pinmap_module.h"
+#include "mux_module.h"
+#include "setup_module.h"
 
-static long encoder_value = 0;
-static int last_encoded = 0;
-static long prev_display_value = LONG_MIN;
+// Debounce for the muxed buttons
+static const unsigned long DEBOUNCE_MS = 20;
+
+static bool enc_sw_prev = false; static unsigned long enc_sw_ts = 0;
+static bool tog_up_prev = false; static unsigned long tog_up_ts = 0;
+static bool tog_dn_prev = false; static unsigned long tog_dn_ts = 0;
+
+// Quadrature transition table (Gray code), signed movement per A/B edge
+static const int8_t TRANS[16] = {
+  0,-1,+1, 0,
+ +1, 0, 0,-1,
+ -1, 0, 0,+1,
+  0,+1,-1, 0
+};
+
+static uint8_t ab_prev = 0;
+static int8_t  mv_sum  = 0;
+
+// Robust step emission: one logical step per full quadrature cycle (4 transitions)
+static const int STEP_THRESH = 4;
+
+static inline bool fell(bool now, bool &prev, unsigned long &ts, unsigned long nowms) {
+  bool edge = (prev && !now) && (nowms - ts >= DEBOUNCE_MS);
+  if (prev != now) ts = nowms; prev = now; return edge;
+}
+static inline bool rose(bool now, bool &prev, unsigned long &ts, unsigned long nowms) {
+  bool edge = (!prev && now) && (nowms - ts >= DEBOUNCE_MS);
+  if (prev != now) ts = nowms; prev = now; return edge;
+}
 
 void encoder_module::begin() {
   pinMode(pinmap::ENC_PIN_A, INPUT_PULLUP);
   pinMode(pinmap::ENC_PIN_B, INPUT_PULLUP);
-  last_encoded = (digitalRead(pinmap::ENC_PIN_A) << 1) | digitalRead(pinmap::ENC_PIN_B);
-  encoder_value = 0;
-  prev_display_value = LONG_MIN;
+  uint8_t a = (uint8_t)digitalRead(pinmap::ENC_PIN_A);
+  uint8_t b = (uint8_t)digitalRead(pinmap::ENC_PIN_B);
+  ab_prev = (uint8_t)((a << 1) | b) & 0x03;
+
+  enc_sw_prev = mux_module::read_channel(pinmap::ENC_SW);
+  tog_up_prev = mux_module::read_channel(pinmap::TOGGLE_UP);
+  tog_dn_prev = mux_module::read_channel(pinmap::TOGGLE_DOWN);
+  unsigned long now = millis();
+  enc_sw_ts = tog_up_ts = tog_dn_ts = now;
 }
 
 void encoder_module::update() {
-  int msb = digitalRead(pinmap::ENC_PIN_A);
-  int lsb = digitalRead(pinmap::ENC_PIN_B);
-  int encoded = (msb << 1) | lsb;
-  int sum = (last_encoded << 2) | encoded;
-  if (sum == 0b1101 || sum == 0b0100 || sum == 0b0010 || sum == 0b1011) {
-    encoder_value++;
-  } else if (sum == 0b1110 || sum == 0b0111 || sum == 0b0001 || sum == 0b1000) {
-    encoder_value--;
-  }
-  last_encoded = encoded;
+  // --- Quadrature decode ---
+  uint8_t a = (uint8_t)digitalRead(pinmap::ENC_PIN_A);
+  uint8_t b = (uint8_t)digitalRead(pinmap::ENC_PIN_B);
+  uint8_t ab_now = (uint8_t)(((a << 1) | b) & 0x03);
 
-  long display_value = encoder_value / 4;
-  if (display_value != prev_display_value) {
-    Serial.print("Encoder value: ");
-    Serial.println(display_value);
-    prev_display_value = display_value;
+  uint8_t idx = (uint8_t)((ab_prev << 2) | ab_now);
+  mv_sum += TRANS[idx];
+  ab_prev = ab_now;
+
+  // Emit when a full cycle worth of movement accumulates (direction-agnostic)
+if (mv_sum >= STEP_THRESH) {
+    setup_module::onEncoderTurn(+1);
+    mv_sum -= STEP_THRESH;
+} else if (mv_sum <= -STEP_THRESH) {
+    setup_module::onEncoderTurn(-1);
+    mv_sum += STEP_THRESH;
+}
+
+  // --- Buttons via mux ---
+  unsigned long now = millis();
+
+  bool enc_sw_now = mux_module::read_channel(pinmap::ENC_SW);
+  if (fell(enc_sw_now, enc_sw_prev, enc_sw_ts, now)) {
+    setup_module::onEncoderPress();
   }
+
+  bool up_now = mux_module::read_channel(pinmap::TOGGLE_UP);
+  bool dn_now = mux_module::read_channel(pinmap::TOGGLE_DOWN);
+  if (rose(up_now, tog_up_prev, tog_up_ts, now)) setup_module::onToggle(+1);
+  if (rose(dn_now, tog_dn_prev, tog_dn_ts, now)) setup_module::onToggle(-1);
 }
