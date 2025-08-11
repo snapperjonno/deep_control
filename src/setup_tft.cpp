@@ -136,7 +136,7 @@ void setup_tft::show_tft() {
   s_inEdit = false;
   drawValue(s_current);
   drawBarFull(s_current, ST77XX_GREEN, true);
-  drawBottomLabel("display");
+  drawBottomLabel("Display");
 }
 
 void setup_tft::show_tft_brightness() {
