@@ -1,5 +1,5 @@
 // =============================
-// File: src/setup_module.cpp
+// File: src/setup_module.cpp (updated for TFT)
 // =============================
 #include "setup_module.h"
 #include <Arduino.h>
@@ -14,6 +14,7 @@
 #include "layout_constants.h"
 #include "setup_battery.h"
 #include "setup_led.h"
+#include "setup_tft.h"   // NEW
 
 // Fallback for triangle Y if not provided by layout_constants.h
 #ifndef TRI_Y
@@ -40,9 +41,22 @@ static int8_t triMode    = -1;
 // runtime content-top derived from actual header text bounds to avoid clipping
 static int s_contentTop = LINE_Y + LINE_THICKNESS + 2;
 
-static inline bool isDetail(int idx) { return idx == 2; }
-static inline int  nextRoot(int idx) { return (idx <= 0) ? 1 : 0; }
-static inline int  prevRoot(int idx) { return (idx >= 1) ? 0 : 1; }
+// Detail screens now include both LED and TFT brightness
+static inline bool isDetail(int idx) { return (idx == 2) || (idx == 4); }
+
+// Root indices in order of appearance
+static inline int nextRoot(int idx) {
+  // sequence: 0 -> 1 -> 3 -> 0
+  if (idx <= 0) return 1;
+  if (idx == 1) return 3;
+  return 0; // for idx >= 3 or any other root, wrap to 0
+}
+static inline int prevRoot(int idx) {
+  // reverse sequence: 0 <- 1 <- 3 <- 0
+  if (idx <= 0) return 3;
+  if (idx == 1) return 0;
+  return 1; // idx >= 3 -> 1
+}
 
 static void drawStaticHeader() {
   // Clear a safe band behind header area
@@ -131,7 +145,7 @@ void clearBetweenTriangles(int16_t yTop, int16_t yBottom) {
 }
 
 static void showMenuIndex(int idx) {
-  const bool wantTriangles = (idx != 2); // hide on brightness detail only
+  const bool wantTriangles = (idx != 2) && (idx != 4); // hide on brightness detail screens
 
   if (!headerDrawn) drawStaticHeader();
 
@@ -141,11 +155,13 @@ static void showMenuIndex(int idx) {
   // 2) Draw triangles BEFORE the screen body so body never gets wiped after
   setTrianglesVisible(wantTriangles);
 
-  // 3) Draw the screen body (battery/LED screens draw their bottom label)
+  // 3) Draw the screen body (battery/LED/TFT screens draw their bottom label)
   switch (idx) {
     case 0: setup_battery::begin(); break;
     case 1: setup_led::show_led(); break;
     case 2: setup_led::show_led_brightness(); break;
+    case 3: setup_tft::show_tft(); break;                 // NEW
+    case 4: setup_tft::show_tft_brightness(); break;      // NEW
     default: break;
   }
 }
@@ -157,6 +173,7 @@ void begin() {
   triMode = -1;
   s_contentTop = LINE_Y + LINE_THICKNESS + 2; // reset; will be raised by drawStaticHeader()
   setup_led::begin();
+  setup_tft::begin(); // NEW: init TFT PWM and load saved value
   showMenuIndex(currentMenuIndex);
 }
 
@@ -169,7 +186,10 @@ void update() {
   switch (currentMenuIndex) {
     case 0: setup_battery::update(); break;
     case 1:
-    case 2: break;
+    case 2:
+    case 3:
+    case 4:
+      break; // no periodic work for LED/TFT screens
     default: break;
   }
 }
@@ -178,8 +198,8 @@ void onEncoderTurn(int8_t dir) {
   if (!inSetupMode || dir == 0) return;
 
   if (isDetail(currentMenuIndex)) {
-    setup_led::on_encoder_turn(dir);
-    return;
+    if (currentMenuIndex == 2) { setup_led::on_encoder_turn(dir); return; }
+    if (currentMenuIndex == 4) { setup_tft::on_encoder_turn(dir); return; }
   }
 
   currentMenuIndex = (dir > 0) ? nextRoot(currentMenuIndex) : prevRoot(currentMenuIndex);
@@ -190,14 +210,27 @@ void onEncoderPress() {
   if (!inSetupMode) return;
 
   if (currentMenuIndex == 1) {
-    currentMenuIndex = 2;
+    currentMenuIndex = 2; // enter LED detail
     showMenuIndex(currentMenuIndex);
     return;
   }
 
   if (currentMenuIndex == 2) {
     setup_led::on_encoder_press();
-    currentMenuIndex = 1;
+    currentMenuIndex = 1; // return to LED root
+    showMenuIndex(currentMenuIndex);
+    return;
+  }
+
+  if (currentMenuIndex == 3) {
+    currentMenuIndex = 4; // enter TFT detail
+    showMenuIndex(currentMenuIndex);
+    return;
+  }
+
+  if (currentMenuIndex == 4) {
+    setup_tft::on_encoder_press();
+    currentMenuIndex = 3; // return to TFT root
     showMenuIndex(currentMenuIndex);
     return;
   }
@@ -207,8 +240,8 @@ void onToggle(int8_t dir) {
   if (!inSetupMode || dir == 0) return;
 
   if (isDetail(currentMenuIndex)) {
-    setup_led::on_toggle(dir);
-    return;
+    if (currentMenuIndex == 2) { setup_led::on_toggle(dir); return; }
+    if (currentMenuIndex == 4) { setup_tft::on_toggle(dir); return; }
   }
 
   onEncoderTurn(dir);

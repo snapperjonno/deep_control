@@ -1,5 +1,5 @@
 // =============================
-// File: src/setup_module.h
+// File: src/setup_module.h (updated for TFT)
 // =============================
 #pragma once
 
@@ -7,7 +7,7 @@
 
 namespace setup_module {
   // Public state
-  extern int currentMenuIndex; // 0 = setup_battery, 1 = setup_led, 2 = setup_led_brightness
+  extern int currentMenuIndex; // 0 = setup_battery, 1 = setup_led, 2 = setup_led_brightness, 3 = setup_tft, 4 = setup_tft_brightness
 
   // Lifecycle
   void begin();   // called once when entering Setup mode
@@ -22,3 +22,4 @@ namespace setup_module {
   // without touching the triangles themselves. Y coordinates are inclusive.
   void clearBetweenTriangles(int16_t yTop, int16_t yBottom);
 }
+
