@@ -138,7 +138,7 @@ void setup_led::show_led() {
   s_inEdit = false;
   drawValue(s_current);
   drawBarFull(s_current, ST77XX_GREEN, true);
-  drawBottomLabel("LED level");
+  drawBottomLabel("LEDs");
 }
 
 void setup_led::show_led_brightness() {
@@ -146,7 +146,7 @@ void setup_led::show_led_brightness() {
   s_lastEditDraw = 255; // force full draw first time
   drawValue(s_edit);
   drawBarFull(s_edit, ST77XX_RED, true);
-  drawBottomLabel("change LED level"); // draw once when entering edit
+  drawBottomLabel("led brightness"); // draw once when entering edit
 }
 
 void setup_led::on_encoder_turn(int8_t dir) {

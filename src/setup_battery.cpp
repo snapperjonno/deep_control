@@ -109,7 +109,7 @@ namespace {
   }
 
   void drawBottomLabel() {
-    const char* BOTTOM_TEXT = "battery level";
+    const char* BOTTOM_TEXT = "battery %";
     clearBottomBandFor(BOTTOM_TEXT);
     tft.setFont(&OpenSans_SemiBold14pt7b);
     tft.setTextColor(COLOR_TEXT, COLOR_BG);
