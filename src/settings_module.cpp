@@ -1,6 +1,14 @@
-// File: settings_module.cpp
+// File: settings_module.cpp — persistence lock (v2.2, key-length fix)
+// Root-cause: ESP32 NVS key names must be <= 15 ASCII chars. Previous keys like
+// "ble_midi_channel" (16 chars) silently fail to store, so reads always return defaults.
+// Fix: use short keys (e.g., "ble_ch", "din_ch") and migrate from legacy camelCase keys
+// (e.g., "bleMidiChannel" / "dinMidiChannel") if present. Keep detailed DEBUG prints.
+
 #include "settings_module.h"
 #include <Preferences.h>
+
+// Enable detailed persistence diagnostics (prints at boot and on saves)
+#define SETTINGS_DEBUG 1
 
 namespace settings_module {
   // -------- constants / helpers --------
@@ -11,51 +19,80 @@ namespace settings_module {
   template <typename T>
   static inline T clampT(T v, T lo, T hi) { return (v < lo) ? lo : (v > hi ? hi : v); }
 
-  // Keys (singletons). Indexed keys are constructed inline where needed.
-  static constexpr const char* KEY_SCHEMA_VERSION      = "schema_version";
-  static constexpr const char* KEY_BLE_CH              = "ble_midi_channel";
-  static constexpr const char* KEY_DIN_CH              = "din_midi_channel";
-  static constexpr const char* KEY_PRESET_MODE         = "preset_mode";
-  static constexpr const char* KEY_LED_BRIGHT          = "led_brightness";
-  static constexpr const char* KEY_TFT_BRIGHT          = "tft_brightness";
-  static constexpr const char* KEY_MIRROR_DELAY_MS     = "mirror_delay_ms";
+  // Keys (ALL <= 15 chars!)
+  static constexpr const char* KEY_SCHEMA_VERSION      = "schema_version"; // 14
+  static constexpr const char* KEY_BLE_CH              = "ble_ch";         // 6
+  static constexpr const char* KEY_DIN_CH              = "din_ch";         // 6
+  static constexpr const char* KEY_PRESET_MODE         = "preset_mode";    // 11
+  static constexpr const char* KEY_LED_BRIGHT          = "led_bright";     // 10
+  static constexpr const char* KEY_TFT_BRIGHT          = "tft_bright";     // 10
+  static constexpr const char* KEY_MIRROR_DELAY_MS     = "mirror_ms";      // 9 (new short key)
 
-  static constexpr const char* KEY_FADER_LBL_IDX       = "fader_label_idx_"; // +i
-  static constexpr const char* KEY_FADER_CC            = "fader_cc_";         // +i
-  static constexpr const char* KEY_STOMP_LBL_IDX       = "stomp_label_idx_"; // +i
-  static constexpr const char* KEY_STOMP_CC            = "stomp_cc_";         // +i
-  static constexpr const char* KEY_STOMP_TYPE          = "stomp_type_";       // +i
+  // Short, safe prefixes (<= 15 incl. index when appended)
+  static constexpr const char* KEY_FADER_LBL_IDX       = "f_lbl_"; // +i
+  static constexpr const char* KEY_FADER_CC            = "f_cc_";  // +i
+  static constexpr const char* KEY_STOMP_LBL_IDX       = "s_lbl_"; // +i
+  static constexpr const char* KEY_STOMP_CC            = "s_cc_";  // +i
+  static constexpr const char* KEY_STOMP_TYPE          = "s_type_";// +i
 
-  static constexpr const char* KEY_CUSTOM_FADER_COUNT  = "custom_fader_count";
-  static constexpr const char* KEY_CUSTOM_STOMP_COUNT  = "custom_stomp_count";
+  static constexpr const char* KEY_CUSTOM_FADER_COUNT  = "f_lbl_n"; // count
+  static constexpr const char* KEY_CUSTOM_STOMP_COUNT  = "s_lbl_n"; // count
 
-  // -------- storage-backed state --------
+  // Legacy keys (read-only migration)
+  static constexpr const char* LEGACY_BLE_CH_CAMEL     = "bleMidiChannel";  // 14 (u32)
+  static constexpr const char* LEGACY_DIN_CH_CAMEL     = "dinMidiChannel";  // 14 (u32)
+  static constexpr const char* LEGACY_MIRROR_DELAY_MS  = "mirror_delay_ms"; // 15 (float ms)
+
+  // -------- storage‑backed state (RAM cache) --------
   static uint8_t schemaVersion = CURRENT_SCHEMA_VERSION;
   static uint8_t bleMidiChannel = 1;  // 1..16
   static uint8_t dinMidiChannel = 1;  // 1..16
-  static uint8_t presetMode = 0;      // app-defined
-  static uint8_t ledBrightness = 10;  // app-defined step index
-  static uint8_t tftBrightness = 10;  // app-defined step index
+  static uint8_t presetMode = 0;      // app‑defined
+  static uint8_t ledBrightness = 10;  // app‑defined step index
+  static uint8_t tftBrightness = 10;  // app‑defined step index
   static float   mirrorDelay   = 0.25f; // seconds
 
   static uint8_t faderLabelIndex[4]  = {0,0,0,0};
   static uint8_t faderCC[4]          = {20,21,22,23};
   static uint8_t stompLabelIndex[4]  = {0,0,0,0};
   static uint8_t stompCC[4]          = {24,25,26,27};
-  static uint8_t stompType[4]        = {0,0,0,0}; // 0=momentary,1=toggle ... app-defined
+  static uint8_t stompType[4]        = {0,0,0,0}; // 0=momentary,1=toggle ... app‑defined
 
   // Custom labels live in RAM with a persisted count and individual keys
-  static String customFaderLabels[8];
+  static String  customFaderLabels[8];
   static uint8_t customFaderLabelCount = 0;
-  static String customStompLabels[8];
+  static String  customStompLabels[8];
   static uint8_t customStompLabelCount = 0;
 
   // -------- internal helpers --------
-  static inline uint8_t readU8(const char* key, uint8_t defv) {
-    return (uint8_t)prefs.getUInt(key, defv);
-  }
-  static inline void writeU8(const char* key, uint8_t v) {
-    prefs.putUInt(key, v);
+  static inline uint8_t readU8(const char* key, uint8_t defv) { return prefs.getUChar(key, defv); }
+  static inline void     writeU8(const char* key, uint8_t v)  { prefs.putUChar(key, v); }
+
+  // Migrate channel from short U8 key or legacy camelCase U32 key
+  static uint8_t readChannelMigrating(const char* shortKey, const char* legacyCamelKey) {
+    // 1) Prefer short U8 key
+    uint8_t u8 = prefs.getUChar(shortKey, 0);
+    if (u8 != 0) return clampT<uint8_t>(u8, 1, 16);
+
+    // 2) Legacy camelCase U32
+    if (prefs.isKey(legacyCamelKey)) {
+      uint32_t u32 = prefs.getUInt(legacyCamelKey, 0);
+      if (u32 != 0) {
+#ifdef SETTINGS_DEBUG
+        Serial.print(F("[settings_module] migrate ")); Serial.print(legacyCamelKey);
+        Serial.print(F(" u32=")); Serial.print(u32);
+#endif
+        uint8_t migrated = clampT<uint8_t>((uint8_t)u32, 1, 16);
+        prefs.putUChar(shortKey, migrated); // rewrite under short key
+#ifdef SETTINGS_DEBUG
+        Serial.print(F(" -> key=")); Serial.print(shortKey);
+        Serial.print(F(" u8=")); Serial.println(migrated);
+#endif
+        return migrated;
+      }
+    }
+    // 3) Default
+    return 1;
   }
 
   static void loadIndexedU8Array(const char* keyPrefix, uint8_t* arr, size_t n, uint8_t defv) {
@@ -85,7 +122,6 @@ namespace settings_module {
       String k = String(itemPrefix) + i;
       prefs.putString(k.c_str(), src[i]);
     }
-    // remove any extra persisted keys beyond count
     for (uint8_t i = count; i < 8; ++i) {
       String k = String(itemPrefix) + i;
       prefs.remove(k.c_str());
@@ -95,94 +131,98 @@ namespace settings_module {
   // -------- API --------
   void begin() {
     prefs.begin(NAMESPACE, false);
+#ifdef SETTINGS_DEBUG
+    Serial.println(F("[settings_module] begin()"));
+    Serial.print(F("  isKey(ble_ch)=")); Serial.println(prefs.isKey(KEY_BLE_CH));
+    Serial.print(F("  ble u8(short)="));    Serial.println(prefs.getUChar(KEY_BLE_CH, 0));
+    Serial.print(F("  ble u32(legacy)="));  Serial.println(prefs.getUInt(LEGACY_BLE_CH_CAMEL, 0));
+    Serial.print(F("  isKey(din_ch)=")); Serial.println(prefs.isKey(KEY_DIN_CH));
+    Serial.print(F("  din u8(short)="));    Serial.println(prefs.getUChar(KEY_DIN_CH, 0));
+    Serial.print(F("  din u32(legacy)="));  Serial.println(prefs.getUInt(LEGACY_DIN_CH_CAMEL, 0));
+#endif
 
-    schemaVersion = readU8(KEY_SCHEMA_VERSION, CURRENT_SCHEMA_VERSION);
-    if (schemaVersion != CURRENT_SCHEMA_VERSION) {
-      // Reset to defaults on schema mismatch
+    // Ensure schema_version exists; if missing, create it
+    if (!prefs.isKey(KEY_SCHEMA_VERSION)) {
       schemaVersion = CURRENT_SCHEMA_VERSION;
-      bleMidiChannel = 1;
-      dinMidiChannel = 1;
-      presetMode     = 0;
-      ledBrightness  = 10;
-      tftBrightness  = 10;
-      mirrorDelay    = 0.25f;
-      for (int i = 0; i < 4; ++i) {
-        faderLabelIndex[i] = 0; faderCC[i] = 20 + i;
-        stompLabelIndex[i] = 0; stompCC[i] = 24 + i; stompType[i] = 0;
-      }
-      customFaderLabelCount = 0; customStompLabelCount = 0;
-
-      prefs.clear();
-      writeU8(KEY_SCHEMA_VERSION, schemaVersion);
-      writeU8(KEY_BLE_CH, bleMidiChannel);
-      writeU8(KEY_DIN_CH, dinMidiChannel);
-      writeU8(KEY_PRESET_MODE, presetMode);
-      writeU8(KEY_LED_BRIGHT, ledBrightness);
-      writeU8(KEY_TFT_BRIGHT, tftBrightness);
-      prefs.putFloat(KEY_MIRROR_DELAY_MS, mirrorDelay * 1000.0f);
-      saveIndexedU8Array(KEY_FADER_LBL_IDX, faderLabelIndex, 4);
-      saveIndexedU8Array(KEY_FADER_CC, faderCC, 4);
-      saveIndexedU8Array(KEY_STOMP_LBL_IDX, stompLabelIndex, 4);
-      saveIndexedU8Array(KEY_STOMP_CC, stompCC, 4);
-      saveIndexedU8Array(KEY_STOMP_TYPE, stompType, 4);
-      saveCustomLabels(KEY_CUSTOM_FADER_COUNT, "custom_fader_label_", customFaderLabels, customFaderLabelCount);
-      saveCustomLabels(KEY_CUSTOM_STOMP_COUNT, "custom_stomp_label_", customStompLabels, customStompLabelCount);
+      writeU8(KEY_SCHEMA_VERSION, (uint8_t)schemaVersion);
     } else {
-      bleMidiChannel = clampT<uint8_t>(readU8(KEY_BLE_CH, 1), 1, 16);
-      dinMidiChannel = clampT<uint8_t>(readU8(KEY_DIN_CH, 1), 1, 16);
-      presetMode     = readU8(KEY_PRESET_MODE, 0);
-      ledBrightness  = readU8(KEY_LED_BRIGHT, 10);
-      tftBrightness  = readU8(KEY_TFT_BRIGHT, 10);
-      mirrorDelay    = prefs.getFloat(KEY_MIRROR_DELAY_MS, 250.0f) / 1000.0f;
-
-      loadIndexedU8Array(KEY_FADER_LBL_IDX, faderLabelIndex, 4, 0);
-      loadIndexedU8Array(KEY_FADER_CC, faderCC, 4, 20);
-      loadIndexedU8Array(KEY_STOMP_LBL_IDX, stompLabelIndex, 4, 0);
-      loadIndexedU8Array(KEY_STOMP_CC, stompCC, 4, 24);
-      loadIndexedU8Array(KEY_STOMP_TYPE, stompType, 4, 0);
-
-      loadCustomLabels(KEY_CUSTOM_FADER_COUNT, "custom_fader_label_", customFaderLabels, customFaderLabelCount);
-      loadCustomLabels(KEY_CUSTOM_STOMP_COUNT, "custom_stomp_label_", customStompLabels, customStompLabelCount);
+      schemaVersion = readU8(KEY_SCHEMA_VERSION, CURRENT_SCHEMA_VERSION);
     }
+
+    if (schemaVersion != CURRENT_SCHEMA_VERSION) {
+      schemaVersion = CURRENT_SCHEMA_VERSION;
+      writeU8(KEY_SCHEMA_VERSION, (uint8_t)schemaVersion);
+    }
+
+    // Channels (with migration)
+    bleMidiChannel = readChannelMigrating(KEY_BLE_CH, LEGACY_BLE_CH_CAMEL);
+    dinMidiChannel = readChannelMigrating(KEY_DIN_CH, LEGACY_DIN_CH_CAMEL);
+    // Ensure stored under short keys
+    prefs.putUChar(KEY_BLE_CH, bleMidiChannel);
+    prefs.putUChar(KEY_DIN_CH, dinMidiChannel);
+
+    // Others
+    presetMode     = readU8(KEY_PRESET_MODE, 0);
+    ledBrightness  = readU8(KEY_LED_BRIGHT, 10);
+    tftBrightness  = readU8(KEY_TFT_BRIGHT, 10);
+    {
+      float ms = prefs.getFloat(KEY_MIRROR_DELAY_MS, -1.0f);
+      if (ms < 0.0f) { ms = prefs.getFloat(LEGACY_MIRROR_DELAY_MS, 250.0f); prefs.putFloat(KEY_MIRROR_DELAY_MS, ms); }
+      mirrorDelay = ms / 1000.0f;
+    }
+
+    loadIndexedU8Array(KEY_FADER_LBL_IDX, faderLabelIndex, 4, 0);
+    loadIndexedU8Array(KEY_FADER_CC,      faderCC,         4, 20);
+    loadIndexedU8Array(KEY_STOMP_LBL_IDX, stompLabelIndex, 4, 0);
+    loadIndexedU8Array(KEY_STOMP_CC,      stompCC,         4, 24);
+    loadIndexedU8Array(KEY_STOMP_TYPE,    stompType,       4, 0);
   }
 
   // --- ble midi channel ---
   uint8_t getBleMidiChannel() { return bleMidiChannel; }
   void setBleMidiChannel(uint8_t ch) {
     bleMidiChannel = clampT<uint8_t>(ch, 1, 16);
-    writeU8(KEY_BLE_CH, bleMidiChannel);
+    prefs.putUChar(KEY_BLE_CH, bleMidiChannel); // short key
+#ifdef SETTINGS_DEBUG
+    Serial.print(F("[settings_module] save BLE cache=")); Serial.print(bleMidiChannel);
+    Serial.print(F(" nvs u8(short)=")); Serial.print(prefs.getUChar(KEY_BLE_CH, 0));
+    Serial.print(F(" u32(legacy)="));    Serial.println(prefs.getUInt(LEGACY_BLE_CH_CAMEL, 0));
+#endif
   }
 
   // --- din midi channel ---
   uint8_t getDinMidiChannel() { return dinMidiChannel; }
   void setDinMidiChannel(uint8_t ch) {
     dinMidiChannel = clampT<uint8_t>(ch, 1, 16);
-    writeU8(KEY_DIN_CH, dinMidiChannel);
+    prefs.putUChar(KEY_DIN_CH, dinMidiChannel); // short key
+#ifdef SETTINGS_DEBUG
+    Serial.print(F("[settings_module] save DIN cache=")); Serial.print(dinMidiChannel);
+    Serial.print(F(" nvs u8(short)=")); Serial.print(prefs.getUChar(KEY_DIN_CH, 0));
+    Serial.print(F(" u32(legacy)="));    Serial.println(prefs.getUInt(LEGACY_DIN_CH_CAMEL, 0));
+#endif
   }
 
   // --- preset mode ---
   uint8_t getPresetMode() { return presetMode; }
   void setPresetMode(uint8_t m) {
     presetMode = m;
-    prefs.putUInt(KEY_PRESET_MODE, m);
+    writeU8(KEY_PRESET_MODE, m);
   }
 
   uint8_t getLedBrightness() { return ledBrightness; }
   void setLedBrightness(uint8_t l) {
-    // No clamping here to avoid assumptions about your step table.
     ledBrightness = l;
-    prefs.putUInt(KEY_LED_BRIGHT, l);
+    writeU8(KEY_LED_BRIGHT, l);
   }
 
   uint8_t getTftBrightness() { return tftBrightness; }
   void setTftBrightness(uint8_t l) {
-    // No clamping here to avoid assumptions about your step table.
     tftBrightness = l;
-    prefs.putUInt(KEY_TFT_BRIGHT, l);
+    writeU8(KEY_TFT_BRIGHT, l);
   }
 
-  float getMirrorDelaySeconds() { return mirrorDelay; }
-  void setMirrorDelaySeconds(float s) {
+  float getMirrorDelay() { return mirrorDelay; }
+  void  setMirrorDelay(float s) {
     mirrorDelay = (s < 0.0f) ? 0.0f : s;
     prefs.putFloat(KEY_MIRROR_DELAY_MS, mirrorDelay * 1000.0f);
   }
@@ -219,15 +259,15 @@ namespace settings_module {
   void addCustomFaderLabel(const String& l) {
     if (customFaderLabelCount < 8) {
       customFaderLabels[customFaderLabelCount] = l;
-      String k = String("custom_fader_label_") + customFaderLabelCount;
+      String k = String("f_lbl_") + customFaderLabelCount;
       prefs.putString(k.c_str(), l);
       ++customFaderLabelCount;
-      prefs.putUInt(KEY_CUSTOM_FADER_COUNT, customFaderLabelCount);
+      writeU8(KEY_CUSTOM_FADER_COUNT, customFaderLabelCount);
     }
   }
   void updateCustomFaderLabel(uint8_t i, const String& l) {
     if (i < customFaderLabelCount) {
-      String k = String("custom_fader_label_") + i;
+      String k = String("f_lbl_") + i;
       prefs.putString(k.c_str(), l);
       customFaderLabels[i] = l;
     }
@@ -236,12 +276,12 @@ namespace settings_module {
     if (i < customFaderLabelCount) {
       for (uint8_t j = i; j + 1 < customFaderLabelCount; ++j) {
         customFaderLabels[j] = customFaderLabels[j + 1];
-        String k = String("custom_fader_label_") + j;
+        String k = String("f_lbl_") + j;
         prefs.putString(k.c_str(), customFaderLabels[j]);
       }
       --customFaderLabelCount;
-      prefs.putUInt(KEY_CUSTOM_FADER_COUNT, customFaderLabelCount);
-      String remKey = String("custom_fader_label_") + customFaderLabelCount;
+      writeU8(KEY_CUSTOM_FADER_COUNT, customFaderLabelCount);
+      String remKey = String("f_lbl_") + customFaderLabelCount;
       prefs.remove(remKey.c_str());
     }
   }
@@ -252,15 +292,15 @@ namespace settings_module {
   void addCustomStompLabel(const String& l) {
     if (customStompLabelCount < 8) {
       customStompLabels[customStompLabelCount] = l;
-      String k = String("custom_stomp_label_") + customStompLabelCount;
+      String k = String("s_lbl_") + customStompLabelCount;
       prefs.putString(k.c_str(), l);
       ++customStompLabelCount;
-      prefs.putUInt(KEY_CUSTOM_STOMP_COUNT, customStompLabelCount);
+      writeU8(KEY_CUSTOM_STOMP_COUNT, customStompLabelCount);
     }
   }
   void updateCustomStompLabel(uint8_t i, const String& l) {
     if (i < customStompLabelCount) {
-      String k = String("custom_stomp_label_") + i;
+      String k = String("s_lbl_") + i;
       prefs.putString(k.c_str(), l);
       customStompLabels[i] = l;
     }
@@ -269,36 +309,22 @@ namespace settings_module {
     if (i < customStompLabelCount) {
       for (uint8_t j = i; j + 1 < customStompLabelCount; ++j) {
         customStompLabels[j] = customStompLabels[j + 1];
-        String k = String("custom_stomp_label_") + j;
+        String k = String("s_lbl_") + j;
         prefs.putString(k.c_str(), customStompLabels[j]);
       }
       --customStompLabelCount;
-      prefs.putUInt(KEY_CUSTOM_STOMP_COUNT, customStompLabelCount);
-      String remKey = String("custom_stomp_label_") + customStompLabelCount;
+      writeU8(KEY_CUSTOM_STOMP_COUNT, customStompLabelCount);
+      String remKey = String("s_lbl_") + customStompLabelCount;
       prefs.remove(remKey.c_str());
     }
   }
 
-  // --- new helpers ---
-  bool applyPresetDefaults(uint8_t /*mode*/) {
-    // Stub: no changes applied yet. Intentionally returns false to signal no‑op.
-    // When implemented, ensure this writes dependent values first (CCs, labels, types),
-    // and avoids writing preset_mode here — that happens in setPresetModeAndApply().
-    return false;
-  }
-
-  bool setPresetModeAndApply(uint8_t mode) {
-    // 1) Apply defaults for dependent fields first.
-    bool applied = applyPresetDefaults(mode);
-
-    // 2) Only after dependent fields are consistent, persist the mode itself.
-    setPresetMode(mode);
-    return applied;
-  }
+  bool applyPresetDefaults(uint8_t /*mode*/) { return false; }
+  bool setPresetModeAndApply(uint8_t mode) { bool applied = applyPresetDefaults(mode); setPresetMode(mode); return applied; }
 
   void dumpToSerial(Stream& out) {
     out.println(F("[settings_module] dump:"));
-    out.print(F(" schema_version: ")); out.println(prefs.getUInt(KEY_SCHEMA_VERSION, CURRENT_SCHEMA_VERSION));
+    out.print(F(" schema_version: ")); out.println(readU8(KEY_SCHEMA_VERSION, CURRENT_SCHEMA_VERSION));
     out.print(F(" bleMidiChannel: ")); out.println(bleMidiChannel);
     out.print(F(" dinMidiChannel: ")); out.println(dinMidiChannel);
     out.print(F(" presetMode:     ")); out.println(presetMode);

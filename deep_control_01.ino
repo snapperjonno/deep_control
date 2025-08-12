@@ -8,6 +8,8 @@ void setup() {
   Serial.begin(115200);
   delay(200);
 
+  settings_module::begin();   // <-- initialize NVS and load saved values (must be before any getters)
+  settings_module::dumpToSerial();
   display_module::earlyInit();
   module_manager::begin_all();
 
