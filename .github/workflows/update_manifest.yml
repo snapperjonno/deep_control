@@ -1,5 +1,8 @@
 name: Update Repo Manifest
 
+permissions:
+  contents: write
+
 on:
   push:
     branches:
