@@ -5,47 +5,49 @@
 #include <Preferences.h>
 
 namespace settings_module {
+  // Initialize storage and load cached values. Safe to call once at boot.
   void begin();
 
+  // --- Existing getters/setters (unchanged signatures) ---
   uint8_t getBleMidiChannel();
-  void setBleMidiChannel(uint8_t channel);
+  void    setBleMidiChannel(uint8_t channel);
 
   uint8_t getDinMidiChannel();
-  void setDinMidiChannel(uint8_t channel);
+  void    setDinMidiChannel(uint8_t channel);
 
   uint8_t getPresetMode();
-  void setPresetMode(uint8_t mode);
+  void    setPresetMode(uint8_t mode);
 
   uint8_t getLedBrightness();
-  void setLedBrightness(uint8_t level);
+  void    setLedBrightness(uint8_t level);
 
   uint8_t getTftBrightness();
-  void setTftBrightness(uint8_t level);
+  void    setTftBrightness(uint8_t level);
 
-  float getMirrorDelay();
-  void setMirrorDelay(float delay);
+  float   getMirrorDelay();
+  void    setMirrorDelay(float delay);
 
-  // Built-in Fader labels (index into fader_labels_list)
+  // Built‑in Fader labels (index into your global fader labels list)
   uint8_t getFaderLabelIndex(uint8_t fader);
-  void setFaderLabelIndex(uint8_t fader, uint8_t labelIndex);
+  void    setFaderLabelIndex(uint8_t fader, uint8_t labelIndex);
 
-  // Built-in Stomp labels (index into stomp_labels_list)
+  // Built‑in Stomp labels (index into your global stomp labels list)
   uint8_t getStompLabelIndex(uint8_t stomp);
-  void setStompLabelIndex(uint8_t stomp, uint8_t labelIndex);
+  void    setStompLabelIndex(uint8_t stomp, uint8_t labelIndex);
 
   // Fader CC assignments
   uint8_t getFaderCC(uint8_t fader);
-  void setFaderCC(uint8_t fader, uint8_t cc);
+  void    setFaderCC(uint8_t fader, uint8_t cc);
 
   // Stomp CC assignments
   uint8_t getStompCC(uint8_t stomp);
-  void setStompCC(uint8_t stomp, uint8_t cc);
+  void    setStompCC(uint8_t stomp, uint8_t cc);
 
   // Stomp type: 0 = momentary (MO), 1 = toggle (TG)
   uint8_t getStompType(uint8_t stomp);
-  void setStompType(uint8_t stomp, uint8_t type);
+  void    setStompType(uint8_t stomp, uint8_t type);
 
-  // Custom label management
+  // --- Custom label management ---
   static const uint8_t MAX_CUSTOM_LABELS = 16;
 
   // Fader custom labels
@@ -61,4 +63,9 @@ namespace settings_module {
   void    addCustomStompLabel(const String& label);
   void    updateCustomStompLabel(uint8_t index, const String& label);
   void    deleteCustomStompLabel(uint8_t index);
-};
+
+  // --- New optional helpers (non‑breaking) ---
+  bool    applyPresetDefaults(uint8_t mode);
+  bool    setPresetModeAndApply(uint8_t mode);
+  void    dumpToSerial(Stream& out = Serial);
+}
