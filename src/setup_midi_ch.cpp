@@ -1,11 +1,9 @@
 // =============================
-// File: src/setup_midi_ch.cpp — v3.9.1 (confirm tag now green)
-// Tweaks:
-// 1) SELECT screen: selected NAME + VALUE both GREEN; other side WHITE.
-// 2) CONFIRM screen: big number + triangles moved DOWN by 3 more px.
-// 3) CONFIRM bottom text: extra space between "select" and red tag → render as "select  - BLE - ch" / "select  - DIN - ch".
-// 4) Avoid bottom-row redraw on encoder turns (SELECT + CONFIRM) to stop flicker; draw once when screen shows.
-// 5) Restore default bottom triangles immediately after exiting CONFIRM.
+// File: src/setup_midi_ch.cpp — v3.9.2 (confirm Y aligned to mirror_delay_select)
+// Tweaks from v3.9.1:
+// • CONFIRM screen: raise big number + lifted triangles to match mirror_delay_select height
+//   by setting valueBaseline_confirm() = 80 (was 85).
+// • Keep: selected tag green; bottom-row rendering rules; X-nudge unchanged.
 // =============================
 
 // Leave on while validating saves; comment out when done
@@ -17,7 +15,7 @@
 #include <Arduino.h>
 #include "settings_module.h"
 #include "fonts/OpenSans_SemiBold14pt7b.h"
-#include "fonts/OpenSans_SemiBold30pt7b.h" // big red digits on confirmation
+#include "fonts/OpenSans_Regular24pt7b.h" // big red digits on confirmation
 #include "layout_constants.h"
 #include "setup_module.h"   // clearBetweenTriangles()
 
@@ -57,10 +55,10 @@ namespace {
   inline int16_t valueY() { return 90; }
   inline int16_t bottomY() { return SETUP_BOTTOM_TEXT_Y; }
 
-  // Confirmation screen baseline (v3.6 moved DOWN by 2 from v3.5)
-  inline int16_t valueBaseline_confirm() { return 96 - 11; } // v3.8: down 3 more px from v3.7 (82 -> 85) // v3.7: down 3 more px from v3.6 (79 -> 82)
+  // Confirmation screen baseline: align with mirror_delay_select (80)
+  inline int16_t valueBaseline_confirm() { return 80; }
 
-  static constexpr int LABEL_INSET = 20; // bring BLE/DIN and values 20 px toward centre
+  static constexpr int LABEL_INSET = 28; // +8 px toward centre to clear the triangles on VIEW + SELECT
 
   struct Bounds { int16_t x1; int16_t y1; uint16_t w; uint16_t h; };
 
@@ -176,7 +174,7 @@ namespace {
     drawCentered(f, use, bottomY(), ST77XX_WHITE);
   }
 
-  // Draw segmented bottom caption: "select " (white) + tag in red + " ch" (white)
+  // Draw segmented bottom caption: "select " (white) + tag in green + " MIDI chan" (white)
   void drawBottomSelectTagColored(bool isBle) {
     const GFXfont* f = &OpenSans_SemiBold14pt7b;
     const int16_t y = bottomY();
@@ -208,49 +206,49 @@ namespace {
 
   // Helper: erase the default triangle strip and draw our own at a given visual centre Y
   // Clear only the triangle areas (left/right) at a given visual centre Y, then draw triangles.
-void drawSideTrianglesAtCenterY(int16_t centerY) {
-  const int16_t half = TRI_SIDE / 2;
-  const int16_t yTop = centerY - half - 2;
-  const int16_t h    = TRI_SIDE + 4;
-  // Clear left triangle area only
-  int16_t leftW = TRI_MARGIN_L + TRI_SIDE + 2;
-  tft.fillRect(0, yTop, leftW, h, ST77XX_BLACK);
-  // Clear right triangle area only
-  int16_t rightX = tft.width() - (TRI_MARGIN_R + TRI_SIDE + 2);
-  int16_t rightW = TRI_MARGIN_R + TRI_SIDE + 2;
-  tft.fillRect(rightX, yTop, rightW, h, ST77XX_BLACK);
+  void drawSideTrianglesAtCenterY(int16_t centerY) {
+    const int16_t half = TRI_SIDE / 2;
+    const int16_t yTop = centerY - half - 2;
+    const int16_t h    = TRI_SIDE + 4;
+    // Clear left triangle area only
+    int16_t leftW = TRI_MARGIN_L + TRI_SIDE + 2;
+    tft.fillRect(0, yTop, leftW, h, ST77XX_BLACK);
+    // Clear right triangle area only
+    int16_t rightX = tft.width() - (TRI_MARGIN_R + TRI_SIDE + 2);
+    int16_t rightW = TRI_MARGIN_R + TRI_SIDE + 2;
+    tft.fillRect(rightX, yTop, rightW, h, ST77XX_BLACK);
 
-  // Draw the triangles
-  tft.fillTriangle(
-    TRI_MARGIN_L, centerY,
-    TRI_MARGIN_L + TRI_SIDE, centerY - half,
-    TRI_MARGIN_L + TRI_SIDE, centerY + half,
-    ST77XX_WHITE
-  );
-  tft.fillTriangle(
-    tft.width() - TRI_MARGIN_R, centerY,
-    tft.width() - TRI_MARGIN_R - TRI_SIDE, centerY - half,
-    tft.width() - TRI_MARGIN_R - TRI_SIDE, centerY + half,
-    ST77XX_WHITE
-  );
-}
+    // Draw the triangles
+    tft.fillTriangle(
+      TRI_MARGIN_L, centerY,
+      TRI_MARGIN_L + TRI_SIDE, centerY - half,
+      TRI_MARGIN_L + TRI_SIDE, centerY + half,
+      ST77XX_WHITE
+    );
+    tft.fillTriangle(
+      tft.width() - TRI_MARGIN_R, centerY,
+      tft.width() - TRI_MARGIN_R - TRI_SIDE, centerY - half,
+      tft.width() - TRI_MARGIN_R - TRI_SIDE, centerY + half,
+      ST77XX_WHITE
+    );
+  }
 
-// Erase the default bottom triangle strip at TRI_Y completely
-void eraseDefaultBottomTrianglesStrip() {
-  const int16_t half = TRI_SIDE / 2;
-  tft.fillRect(0, TRI_Y - half - 2, tft.width(), TRI_SIDE + 4, ST77XX_BLACK);
-}
+  // Erase the default bottom triangle strip at TRI_Y completely
+  void eraseDefaultBottomTrianglesStrip() {
+    const int16_t half = TRI_SIDE / 2;
+    tft.fillRect(0, TRI_Y - half - 2, tft.width(), TRI_SIDE + 4, ST77XX_BLACK);
+  }
 
-   inline int16_t valueXNudge_confirm() { return -3; } // negative = left, positive = right
+  inline int16_t valueXNudge_confirm() { return -3; } // negative = left, positive = right
 
   void drawEditValue(uint8_t v, int16_t baselineY) {
-    const GFXfont* f = &OpenSans_SemiBold30pt7b;
-        clearBoxForText(f, "88", tft.width()/2 + valueXNudge_confirm(), baselineY, /*pad=*/10);
+    const GFXfont* f = &OpenSans_Regular24pt7b;
+    clearBoxForText(f, "88", tft.width()/2 + valueXNudge_confirm(), baselineY, /*pad=*/10);
 
     char buf[8]; snprintf(buf, sizeof(buf), "%02u", (unsigned)v);
     tft.setTextColor(ST77XX_RED);
     Bounds b; textBounds(f, buf, 0, baselineY, b);
-        tft.setCursor((tft.width() - (int16_t)b.w)/2 + valueXNudge_confirm(), baselineY);
+    tft.setCursor((tft.width() - (int16_t)b.w)/2 + valueXNudge_confirm(), baselineY);
     tft.print(buf);
   }
 
@@ -272,7 +270,7 @@ void setup_midi_ch::begin() {
 void setup_midi_ch::show_midi_ch() {
   s_state = State::VIEW;
   int16_t cxBle, cxDin;
-  // (5) Ensure default triangles are restored first (clears strip then draws)
+  // Ensure default triangles are restored first (clears strip then draws)
   drawSideTrianglesAtCenterY(TRI_Y);
   // Names WHITE, values GREEN
   drawLabels(ST77XX_WHITE, ST77XX_WHITE, cxBle, cxDin);
@@ -283,6 +281,14 @@ void setup_midi_ch::show_midi_ch() {
 void setup_midi_ch::show_midi_ch_select() {
   s_state = State::SELECT_OUTPUT;
   bool selBle = (s_selected == OutputSel::BLE);
+
+  // Draw raised side triangles ONCE at the same centre Y as mirror_delay_select
+  // Use the SAME font metrics as mirror_delay_select (OpenSans_Regular24pt7b) to compute visual centre
+  eraseDefaultBottomTrianglesStrip();
+  int16_t baselineMirror = 80; // mirror_delay_select baseline
+  int16_t centerY = centerYForText(&OpenSans_Regular24pt7b, "3.0 sec", baselineMirror);
+  drawSideTrianglesAtCenterY(centerY);
+
 
   // Draw labels (selected NAME green; other white)
   int16_t cxBle, cxDin;
@@ -314,7 +320,7 @@ void setup_midi_ch::show_midi_ch_confirmation() {
 
   // Draw raised triangles ONCE, then draw the big number (order avoids wiping the number)
   int16_t baselineY = valueBaseline_confirm();
-  int16_t centerY = centerYForText(&OpenSans_SemiBold30pt7b, "88", baselineY);
+  int16_t centerY = centerYForText(&OpenSans_Regular24pt7b, "88", baselineY);
   drawSideTrianglesAtCenterY(centerY); // draw once
   drawEditValue(s_edit, baselineY);
 
