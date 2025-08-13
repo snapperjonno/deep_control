@@ -106,10 +106,10 @@ namespace {
     tft.setFont(f);
 
     // BLE label (shifted towards centre by LABEL_INSET)
-    const char* LBLE = "BLE";
+    const char* LBLE = "BT";
     Bounds bbBle; textBounds(f, LBLE, 0, labelY(), bbBle);
     int16_t xBle = colLX() + LABEL_INSET; // left-aligned start
-    clearBoxForText(f, "BLE", xBle + (int16_t)bbBle.w/2, labelY());
+    clearBoxForText(f, "BT", xBle + (int16_t)bbBle.w/2, labelY());
     tft.setTextColor(colBle);
     tft.setCursor(xBle, labelY()); tft.print(LBLE);
     cxBle = xBle + (int16_t)bbBle.w/2; // centre under the word
@@ -182,9 +182,9 @@ namespace {
     const int16_t y = bottomY();
     tft.setFont(f);
 
-    const char* lead = "new ";
-    const char* tag  = isBle ? " BLE " : " DIN "; // leading space for extra gap
-    const char* tail = " MIDI ch";
+    const char* lead = "set ";
+    const char* tag  = isBle ? " BT " : " DIN "; // leading space for extra gap
+    const char* tail = " MIDI chan";
 
     Bounds bLead, bTag, bTail;
     textBounds(f, lead, 0, y, bLead);
