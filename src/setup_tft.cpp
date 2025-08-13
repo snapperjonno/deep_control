@@ -144,7 +144,7 @@ void setup_tft::show_tft_brightness() {
   s_lastEditDraw = 255; // force full draw first time
   drawValue(s_edit);
   drawBarFull(s_edit, ST77XX_RED, true);
-  drawBottomLabel("screen brightness");
+  drawBottomLabel("Display brightness");
 }
 
 void setup_tft::on_encoder_turn(int8_t dir) {

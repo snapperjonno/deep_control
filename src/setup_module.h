@@ -1,5 +1,5 @@
 // =============================
-// File: src/setup_module.h (updated for TFT)
+// File: src/setup_module.h (updated for TFT + new Fader CC menu)
 // =============================
 #pragma once
 
@@ -7,7 +7,7 @@
 
 namespace setup_module {
   // Public state
-  extern int currentMenuIndex; // 0 = setup_battery, 1 = setup_led, 2 = setup_led_brightness, 3 = setup_tft, 4 = setup_tft_brightness
+  extern int currentMenuIndex; // 0=battery, 1=led, 2=led_brightness, 3=tft, 4=tft_brightness, others below
 
   // Lifecycle
   void begin();   // called once when entering Setup mode
@@ -22,4 +22,3 @@ namespace setup_module {
   // without touching the triangles themselves. Y coordinates are inclusive.
   void clearBetweenTriangles(int16_t yTop, int16_t yBottom);
 }
-

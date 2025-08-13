@@ -1,5 +1,5 @@
 // =============================
-// File: src/setup_module.cpp — v3 (adds Mirror Delay item)
+// File: src/setup_module.cpp — v4 (adds Fader CC item)
 // =============================
 #include "setup_module.h"
 #include <Arduino.h>
@@ -16,10 +16,20 @@
 #include "setup_led.h"
 #include "setup_tft.h"
 #include "setup_midi_ch.h"
-#include "setup_mirror_delay.h"   // UPDATED NAME
+#include "setup_mirror_delay.h"
+#include "setup_fader_cc.h"
 
 #ifndef TRI_Y
 #define TRI_Y 117
+#endif
+#ifndef TRI_SIDE
+#define TRI_SIDE 20
+#endif
+#ifndef TRI_MARGIN_L
+#define TRI_MARGIN_L 7
+#endif
+#ifndef TRI_MARGIN_R
+#define TRI_MARGIN_R 7
 #endif
 
 #define COLOR_BG    ST77XX_BLACK
@@ -32,6 +42,13 @@
 #define LINE_MARGIN_X   10
 #define LINE_LENGTH     50
 
+#ifndef SCREEN_W
+#define SCREEN_W 240
+#endif
+#ifndef SCREEN_H
+#define SCREEN_H 135
+#endif
+
 namespace setup_module {
 
 int  currentMenuIndex = 0;
@@ -40,27 +57,39 @@ static bool headerDrawn  = false;
 static int8_t triMode    = -1;
 static int s_contentTop = LINE_Y + LINE_THICKNESS + 2;
 
-static constexpr int IDX_MIRROR_ROOT   = 5;
-static constexpr int IDX_MIRROR_EDIT   = 6;
-static constexpr int IDX_MIDI_CH_ROOT   = 7;
-static constexpr int IDX_MIDI_CH_SELECT = 8;
-static constexpr int IDX_MIDI_CH_EDIT   = 9;
+// Existing detail indices kept
+static constexpr int IDX_MIRROR_ROOT     = 5;
+static constexpr int IDX_MIRROR_EDIT     = 6;
+static constexpr int IDX_MIDI_CH_ROOT    = 7;
+static constexpr int IDX_MIDI_CH_SELECT  = 8;
+static constexpr int IDX_MIDI_CH_EDIT    = 9;
+
+// New: Fader CC item (three screens)
+static constexpr int IDX_FADER_CC_ROOT   = 10;
+static constexpr int IDX_FADER_CC_SELECT = 11;
+static constexpr int IDX_FADER_CC_EDIT   = 12;
 
 static inline bool isDetail(int idx) {
-  return (idx == 2) || (idx == 4) || (idx == IDX_MIRROR_EDIT) ||
-         (idx == IDX_MIDI_CH_SELECT) || (idx == IDX_MIDI_CH_EDIT);
+  return (idx == 2) || (idx == 4) ||
+         (idx == IDX_MIRROR_EDIT) ||
+         (idx == IDX_MIDI_CH_SELECT) || (idx == IDX_MIDI_CH_EDIT) ||
+         (idx == IDX_FADER_CC_SELECT) || (idx == IDX_FADER_CC_EDIT);
 }
 
 static inline int nextRoot(int idx) {
+  // Root pages in order: 0(batt) -> 1(led) -> 3(tft) -> mirror -> midi_ch -> fader_cc -> 0
   if (idx <= 0) return 1;
   if (idx == 1) return 3;
   if (idx == 3) return IDX_MIRROR_ROOT;
   if (idx == IDX_MIRROR_ROOT) return IDX_MIDI_CH_ROOT;
-  if (idx == IDX_MIDI_CH_ROOT) return 0;
+  if (idx == IDX_MIDI_CH_ROOT) return IDX_FADER_CC_ROOT;
+  if (idx == IDX_FADER_CC_ROOT) return 0;
   return 0;
 }
 static inline int prevRoot(int idx) {
-  if (idx <= 0) return IDX_MIDI_CH_ROOT;
+  // Reverse of nextRoot
+  if (idx <= 0) return IDX_FADER_CC_ROOT;
+  if (idx == IDX_FADER_CC_ROOT) return IDX_MIDI_CH_ROOT;
   if (idx == IDX_MIDI_CH_ROOT) return IDX_MIRROR_ROOT;
   if (idx == IDX_MIRROR_ROOT) return 3;
   if (idx == 3) return 1;
@@ -141,11 +170,14 @@ static void showMenuIndex(int idx) {
     case 2: setup_led::show_led_brightness(); break;
     case 3: setup_tft::show_tft(); break;
     case 4: setup_tft::show_tft_brightness(); break;
-    case IDX_MIRROR_ROOT:   setup_mirror_delay::show_mirror(); break;
-    case IDX_MIRROR_EDIT:   setup_mirror_delay::show_mirror_select(); break;
-    case IDX_MIDI_CH_ROOT:   setup_midi_ch::show_midi_ch(); break;
-    case IDX_MIDI_CH_SELECT: setup_midi_ch::show_midi_ch_select(); break;
-    case IDX_MIDI_CH_EDIT:   setup_midi_ch::show_midi_ch_confirmation(); break;
+    case IDX_MIRROR_ROOT:     setup_mirror_delay::show_mirror(); break;
+    case IDX_MIRROR_EDIT:     setup_mirror_delay::show_mirror_select(); break;
+    case IDX_MIDI_CH_ROOT:    setup_midi_ch::show_midi_ch(); break;
+    case IDX_MIDI_CH_SELECT:  setup_midi_ch::show_midi_ch_select(); break;
+    case IDX_MIDI_CH_EDIT:    setup_midi_ch::show_midi_ch_confirmation(); break;
+    case IDX_FADER_CC_ROOT:   setup_fader_cc::show_fader_cc(); break;
+    case IDX_FADER_CC_SELECT: setup_fader_cc::show_fader_cc_select(); break;
+    case IDX_FADER_CC_EDIT:   setup_fader_cc::show_fader_cc_edit(); break;
     default: break;
   }
 }
@@ -156,10 +188,13 @@ void begin() {
   headerDrawn = false;
   triMode = -1;
   s_contentTop = LINE_Y + LINE_THICKNESS + 2;
+
   setup_led::begin();
   setup_tft::begin();
   setup_midi_ch::begin();
   setup_mirror_delay::begin();
+  setup_fader_cc::begin();
+
   showMenuIndex(currentMenuIndex);
 }
 
@@ -180,6 +215,8 @@ void onEncoderTurn(int8_t dir) {
     if (currentMenuIndex == IDX_MIRROR_EDIT) { setup_mirror_delay::on_encoder_turn(dir); return; }
     if (currentMenuIndex == IDX_MIDI_CH_SELECT || currentMenuIndex == IDX_MIDI_CH_EDIT) {
       setup_midi_ch::on_encoder_turn(dir); return; }
+    if (currentMenuIndex == IDX_FADER_CC_SELECT || currentMenuIndex == IDX_FADER_CC_EDIT) {
+      setup_fader_cc::on_encoder_turn(dir); return; }
   }
   currentMenuIndex = (dir > 0) ? nextRoot(currentMenuIndex) : prevRoot(currentMenuIndex);
   showMenuIndex(currentMenuIndex);
@@ -187,15 +224,23 @@ void onEncoderTurn(int8_t dir) {
 
 void onEncoderPress() {
   if (!inSetupMode) return;
+
   if (currentMenuIndex == 1) { currentMenuIndex = 2; showMenuIndex(currentMenuIndex); return; }
   if (currentMenuIndex == 2) { setup_led::on_encoder_press(); currentMenuIndex = 1; showMenuIndex(currentMenuIndex); return; }
+
   if (currentMenuIndex == 3) { currentMenuIndex = 4; showMenuIndex(currentMenuIndex); return; }
   if (currentMenuIndex == 4) { setup_tft::on_encoder_press(); currentMenuIndex = 3; showMenuIndex(currentMenuIndex); return; }
+
   if (currentMenuIndex == IDX_MIRROR_ROOT) { currentMenuIndex = IDX_MIRROR_EDIT; showMenuIndex(currentMenuIndex); return; }
   if (currentMenuIndex == IDX_MIRROR_EDIT) { setup_mirror_delay::on_encoder_press(); currentMenuIndex = IDX_MIRROR_ROOT; showMenuIndex(currentMenuIndex); return; }
+
   if (currentMenuIndex == IDX_MIDI_CH_ROOT)   { currentMenuIndex = IDX_MIDI_CH_SELECT; showMenuIndex(currentMenuIndex); return; }
   if (currentMenuIndex == IDX_MIDI_CH_SELECT) { currentMenuIndex = IDX_MIDI_CH_EDIT;   showMenuIndex(currentMenuIndex); return; }
-  if (currentMenuIndex == IDX_MIDI_CH_EDIT)   { setup_midi_ch::on_encoder_press(); currentMenuIndex = IDX_MIDI_CH_ROOT; showMenuIndex(currentMenuIndex); return; }
+  if (currentMenuIndex == IDX_MIDI_CH_EDIT)   { setup_midi_ch::on_encoder_press();     currentMenuIndex = IDX_MIDI_CH_ROOT; showMenuIndex(currentMenuIndex); return; }
+
+  if (currentMenuIndex == IDX_FADER_CC_ROOT)   { currentMenuIndex = IDX_FADER_CC_SELECT; showMenuIndex(currentMenuIndex); return; }
+  if (currentMenuIndex == IDX_FADER_CC_SELECT) { currentMenuIndex = IDX_FADER_CC_EDIT;   showMenuIndex(currentMenuIndex); return; }
+  if (currentMenuIndex == IDX_FADER_CC_EDIT)   { setup_fader_cc::on_encoder_press();     currentMenuIndex = IDX_FADER_CC_ROOT; showMenuIndex(currentMenuIndex); return; }
 }
 
 void onToggle(int8_t dir) {
@@ -205,6 +250,7 @@ void onToggle(int8_t dir) {
     if (currentMenuIndex == 4) { setup_tft::on_toggle(dir); return; }
     if (currentMenuIndex == IDX_MIRROR_EDIT) { setup_mirror_delay::on_toggle(dir); return; }
     if (currentMenuIndex == IDX_MIDI_CH_SELECT || currentMenuIndex == IDX_MIDI_CH_EDIT) { setup_midi_ch::on_toggle(dir); return; }
+    if (currentMenuIndex == IDX_FADER_CC_SELECT || currentMenuIndex == IDX_FADER_CC_EDIT) { setup_fader_cc::on_toggle(dir); return; }
   }
   onEncoderTurn(dir);
 }
