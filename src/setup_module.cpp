@@ -1,6 +1,13 @@
 // =============================
-// File: src/setup_module.cpp — v4 (adds Fader CC item)
+// File: src/setup_module.cpp — v5.1 (adds Stomp CC after Fader CC)
+// Notes:
+//  • Inserts a new root item "Stomp CC" AFTER the existing "Fader CC" root.
+//  • Adds three detail screens for Stomp: root → select → edit.
+//  • Forwards encoder/toggle events to setup_stomp_cc on those screens.
+//  • Calls setup_stomp_cc::begin() during setup_module::begin().
+// Keep your existing includes/ordering if different; this file is self-contained.
 // =============================
+
 #include "setup_module.h"
 #include <Arduino.h>
 #include <SPI.h>
@@ -18,6 +25,7 @@
 #include "setup_midi_ch.h"
 #include "setup_mirror_delay.h"
 #include "setup_fader_cc.h"
+#include "setup_stomp_cc.h"   // NEW
 
 #ifndef TRI_Y
 #define TRI_Y 117
@@ -64,31 +72,39 @@ static constexpr int IDX_MIDI_CH_ROOT    = 7;
 static constexpr int IDX_MIDI_CH_SELECT  = 8;
 static constexpr int IDX_MIDI_CH_EDIT    = 9;
 
-// New: Fader CC item (three screens)
+// Fader CC (existing)
 static constexpr int IDX_FADER_CC_ROOT   = 10;
 static constexpr int IDX_FADER_CC_SELECT = 11;
 static constexpr int IDX_FADER_CC_EDIT   = 12;
+
+// NEW: Stomp CC (three screens), placed AFTER Fader CC
+static constexpr int IDX_STOMP_CC_ROOT   = 13;
+static constexpr int IDX_STOMP_CC_SELECT = 14;
+static constexpr int IDX_STOMP_CC_EDIT   = 15;
 
 static inline bool isDetail(int idx) {
   return (idx == 2) || (idx == 4) ||
          (idx == IDX_MIRROR_EDIT) ||
          (idx == IDX_MIDI_CH_SELECT) || (idx == IDX_MIDI_CH_EDIT) ||
-         (idx == IDX_FADER_CC_SELECT) || (idx == IDX_FADER_CC_EDIT);
+         (idx == IDX_FADER_CC_SELECT) || (idx == IDX_FADER_CC_EDIT) ||
+         (idx == IDX_STOMP_CC_SELECT) || (idx == IDX_STOMP_CC_EDIT);
 }
 
 static inline int nextRoot(int idx) {
-  // Root pages in order: 0(batt) -> 1(led) -> 3(tft) -> mirror -> midi_ch -> fader_cc -> 0
+  // Root pages in order: 0(batt) -> 1(led) -> 3(tft) -> mirror -> midi_ch -> fader_cc -> stomp_cc -> 0
   if (idx <= 0) return 1;
   if (idx == 1) return 3;
   if (idx == 3) return IDX_MIRROR_ROOT;
   if (idx == IDX_MIRROR_ROOT) return IDX_MIDI_CH_ROOT;
   if (idx == IDX_MIDI_CH_ROOT) return IDX_FADER_CC_ROOT;
-  if (idx == IDX_FADER_CC_ROOT) return 0;
+  if (idx == IDX_FADER_CC_ROOT) return IDX_STOMP_CC_ROOT;   // NEW
+  if (idx == IDX_STOMP_CC_ROOT) return 0;                    // NEW wrap
   return 0;
 }
 static inline int prevRoot(int idx) {
   // Reverse of nextRoot
-  if (idx <= 0) return IDX_FADER_CC_ROOT;
+  if (idx <= 0) return IDX_STOMP_CC_ROOT;                    // NEW
+  if (idx == IDX_STOMP_CC_ROOT) return IDX_FADER_CC_ROOT;    // NEW
   if (idx == IDX_FADER_CC_ROOT) return IDX_MIDI_CH_ROOT;
   if (idx == IDX_MIDI_CH_ROOT) return IDX_MIRROR_ROOT;
   if (idx == IDX_MIRROR_ROOT) return 3;
@@ -178,6 +194,9 @@ static void showMenuIndex(int idx) {
     case IDX_FADER_CC_ROOT:   setup_fader_cc::show_fader_cc(); break;
     case IDX_FADER_CC_SELECT: setup_fader_cc::show_fader_cc_select(); break;
     case IDX_FADER_CC_EDIT:   setup_fader_cc::show_fader_cc_edit(); break;
+    case IDX_STOMP_CC_ROOT:   setup_stomp_cc::show_stomp_cc(); break;         // NEW
+    case IDX_STOMP_CC_SELECT: setup_stomp_cc::show_stomp_cc_select(); break; // NEW
+    case IDX_STOMP_CC_EDIT:   setup_stomp_cc::show_stomp_cc_edit(); break;   // NEW
     default: break;
   }
 }
@@ -194,6 +213,7 @@ void begin() {
   setup_midi_ch::begin();
   setup_mirror_delay::begin();
   setup_fader_cc::begin();
+  setup_stomp_cc::begin(); // NEW
 
   showMenuIndex(currentMenuIndex);
 }
@@ -217,6 +237,8 @@ void onEncoderTurn(int8_t dir) {
       setup_midi_ch::on_encoder_turn(dir); return; }
     if (currentMenuIndex == IDX_FADER_CC_SELECT || currentMenuIndex == IDX_FADER_CC_EDIT) {
       setup_fader_cc::on_encoder_turn(dir); return; }
+    if (currentMenuIndex == IDX_STOMP_CC_SELECT || currentMenuIndex == IDX_STOMP_CC_EDIT) { // NEW
+      setup_stomp_cc::on_encoder_turn(dir); return; }
   }
   currentMenuIndex = (dir > 0) ? nextRoot(currentMenuIndex) : prevRoot(currentMenuIndex);
   showMenuIndex(currentMenuIndex);
@@ -241,6 +263,10 @@ void onEncoderPress() {
   if (currentMenuIndex == IDX_FADER_CC_ROOT)   { currentMenuIndex = IDX_FADER_CC_SELECT; showMenuIndex(currentMenuIndex); return; }
   if (currentMenuIndex == IDX_FADER_CC_SELECT) { currentMenuIndex = IDX_FADER_CC_EDIT;   showMenuIndex(currentMenuIndex); return; }
   if (currentMenuIndex == IDX_FADER_CC_EDIT)   { setup_fader_cc::on_encoder_press();     currentMenuIndex = IDX_FADER_CC_ROOT; showMenuIndex(currentMenuIndex); return; }
+
+  if (currentMenuIndex == IDX_STOMP_CC_ROOT)   { currentMenuIndex = IDX_STOMP_CC_SELECT; showMenuIndex(currentMenuIndex); return; }   // NEW
+  if (currentMenuIndex == IDX_STOMP_CC_SELECT) { currentMenuIndex = IDX_STOMP_CC_EDIT;   showMenuIndex(currentMenuIndex); return; }   // NEW
+  if (currentMenuIndex == IDX_STOMP_CC_EDIT)   { setup_stomp_cc::on_encoder_press();     currentMenuIndex = IDX_STOMP_CC_ROOT; showMenuIndex(currentMenuIndex); return; }   // NEW
 }
 
 void onToggle(int8_t dir) {
@@ -251,6 +277,7 @@ void onToggle(int8_t dir) {
     if (currentMenuIndex == IDX_MIRROR_EDIT) { setup_mirror_delay::on_toggle(dir); return; }
     if (currentMenuIndex == IDX_MIDI_CH_SELECT || currentMenuIndex == IDX_MIDI_CH_EDIT) { setup_midi_ch::on_toggle(dir); return; }
     if (currentMenuIndex == IDX_FADER_CC_SELECT || currentMenuIndex == IDX_FADER_CC_EDIT) { setup_fader_cc::on_toggle(dir); return; }
+    if (currentMenuIndex == IDX_STOMP_CC_SELECT || currentMenuIndex == IDX_STOMP_CC_EDIT) { setup_stomp_cc::on_toggle(dir); return; } // NEW
   }
   onEncoderTurn(dir);
 }

@@ -1,8 +1,8 @@
-// File: settings_module.cpp — persistence lock (v2.2, key-length fix)
-// Root-cause: ESP32 NVS key names must be <= 15 ASCII chars. Previous keys like
-// "ble_midi_channel" (16 chars) silently fail to store, so reads always return defaults.
-// Fix: use short keys (e.g., "ble_ch", "din_ch") and migrate from legacy camelCase keys
-// (e.g., "bleMidiChannel" / "dinMidiChannel") if present. Keep detailed DEBUG prints.
+// File: settings_module.cpp — persistence lock (v2.3: Stomp CC defaults 80–83)
+// Changes from v2.2:
+//  • First‑run defaults for STOMP CC are now S1..S4 → 80,81,82,83 (was 24..27).
+//  • If any s_cc_* key exists, we HONOUR stored values and load with a safe default (80) per slot.
+//  • If no s_cc_* key exists, we seed 80..83 into NVS so the UI shows your requested defaults.
 
 #include "settings_module.h"
 #include <Preferences.h>
@@ -55,7 +55,7 @@ namespace settings_module {
   static uint8_t faderLabelIndex[4]  = {0,0,0,0};
   static uint8_t faderCC[4]          = {20,21,22,23};
   static uint8_t stompLabelIndex[4]  = {0,0,0,0};
-  static uint8_t stompCC[4]          = {24,25,26,27};
+  static uint8_t stompCC[4]          = {80,81,82,83};  // NEW defaults
   static uint8_t stompType[4]        = {0,0,0,0}; // 0=momentary,1=toggle ... app‑defined
 
   // Custom labels live in RAM with a persisted count and individual keys
@@ -174,7 +174,20 @@ namespace settings_module {
     loadIndexedU8Array(KEY_FADER_LBL_IDX, faderLabelIndex, 4, 0);
     loadIndexedU8Array(KEY_FADER_CC,      faderCC,         4, 20);
     loadIndexedU8Array(KEY_STOMP_LBL_IDX, stompLabelIndex, 4, 0);
-    loadIndexedU8Array(KEY_STOMP_CC,      stompCC,         4, 24);
+
+    // ---- STOMP CC: seed 80..83 on first run; otherwise honour stored values ----
+    bool haveAnyStomp = false;
+    for (uint8_t i = 0; i < 4; ++i) { String k = String(KEY_STOMP_CC) + i; if (prefs.isKey(k.c_str())) { haveAnyStomp = true; break; } }
+    if (haveAnyStomp) {
+      loadIndexedU8Array(KEY_STOMP_CC, stompCC, 4, 80);
+    } else {
+      stompCC[0]=80; stompCC[1]=81; stompCC[2]=82; stompCC[3]=83;
+      saveIndexedU8Array(KEY_STOMP_CC, stompCC, 4);
+#ifdef SETTINGS_DEBUG
+      Serial.println(F("[settings_module] seeded STOMP CC defaults 80,81,82,83"));
+#endif
+    }
+
     loadIndexedU8Array(KEY_STOMP_TYPE,    stompType,       4, 0);
   }
 
