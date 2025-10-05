@@ -1,542 +1,536 @@
 [
   {
     "sha256": "4073ecf96191d84594c1b7dd477a45899c5650fcc1c59e06eca91a1bbb821808",
-    "path": ".gitignore",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/.gitignore",
     "size": 419,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/.gitignore"
+    "path": ".gitignore"
   },
   {
-    "sha256": "187834b83e56da52298fc7879c94ef9644178a2e7e51bbceb898ff29688654e5",
-    "path": "deep_control_01.ino",
-    "size": 591,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/deep_control_01.ino"
+    "sha256": "e09d370a92550adc2fbae45f3ff6feb95473b4807962aa21108ebb3edfe23cb0",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/deep_control_01.ino",
+    "size": 649,
+    "path": "deep_control_01.ino"
   },
   {
     "sha256": "18fc909388d5e730c78f2f0936d2ad43e3090026362c6ffd23b91b353add6511",
-    "path": "generate_manifest.ps1",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/generate_manifest.ps1",
     "size": 1337,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/generate_manifest.ps1"
+    "path": "generate_manifest.ps1"
   },
   {
     "sha256": "9e95888449fc62570ec02356eaa7722bc8dba379ed15bcae6ac94dfb17a15c11",
-    "path": "link for ChatGPT to read the GitHub repo.txt",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/link%20for%20ChatGPT%20to%20read%20the%20GitHub%20repo.txt",
     "size": 413,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/link%20for%20ChatGPT%20to%20read%20the%20GitHub%20repo.txt"
+    "path": "link for ChatGPT to read the GitHub repo.txt"
   },
   {
-    "sha256": "53668f1152fb830cc622367777631d1f60216ce1637978c9e4c5c276b03ddb3f",
-    "path": "repo_manifest.json",
-    "size": 23237,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/repo_manifest.json"
+    "sha256": "a07421f036f4a646a8160bdacd3c62a4d7b4141b1e0f9ce1411f0da4dce9777e",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/repo_manifest.json",
+    "size": 25852,
+    "path": "repo_manifest.json"
   },
   {
     "sha256": "42f8e45350ad572e871dbcffdaff0a05da804329cc48382df4d8ea08f152f04c",
-    "path": "verify_manifest.ps1",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/verify_manifest.ps1",
     "size": 1512,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/verify_manifest.ps1"
+    "path": "verify_manifest.ps1"
   },
   {
     "sha256": "d5fc1ca3d5fbc030f9694be26e4c34d7ec0ab3133d9730850e77527e3a93806b",
-    "path": ".github/workflows/update_manifest.yml",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/.github/workflows/update_manifest.yml",
     "size": 907,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/.github/workflows/update_manifest.yml"
+    "path": ".github/workflows/update_manifest.yml"
   },
   {
     "sha256": "e08e1d602d20c75af17807732a8e1e94d46bf7d42340fa27e9bcacf46587611e",
-    "path": "docs/~$Input and useage flow 02.xlsx",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/~$Input%20and%20useage%20flow%2002.xlsx",
     "size": 165,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/~$Input%20and%20useage%20flow%2002.xlsx"
+    "path": "docs/~$Input and useage flow 02.xlsx"
   },
   {
     "sha256": "e08e1d602d20c75af17807732a8e1e94d46bf7d42340fa27e9bcacf46587611e",
-    "path": "docs/~$mode_profile_master_template.xlsx",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/~$mode_profile_master_template.xlsx",
     "size": 165,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/~$mode_profile_master_template.xlsx"
+    "path": "docs/~$mode_profile_master_template.xlsx"
   },
   {
     "sha256": "08f8e316b5ba4749b2b6bc74399b529829670e97621548ccc89049d2106b35de",
-    "path": "docs/Chat synopsis before beginning coding 03 - WORKING DOCUMENT.docx",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/Chat%20synopsis%20before%20beginning%20coding%2003%20-%20WORKING%20DOCUMENT.docx",
     "size": 1286208,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/Chat%20synopsis%20before%20beginning%20coding%2003%20-%20WORKING%20DOCUMENT.docx"
+    "path": "docs/Chat synopsis before beginning coding 03 - WORKING DOCUMENT.docx"
   },
   {
     "sha256": "2ebdcdcbfeca3e8e5563d20aa014c9f7aba9e39e1b727dfc77fa7debeeb98888",
-    "path": "docs/DeepControl_Profile_Populated.xlsx",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/DeepControl_Profile_Populated.xlsx",
     "size": 18957,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/DeepControl_Profile_Populated.xlsx"
+    "path": "docs/DeepControl_Profile_Populated.xlsx"
   },
   {
     "sha256": "c4f3db73bdef77e750b790ce7d51e574f5576f3425ff0b620fa4ea922b171dac",
-    "path": "docs/Input and useage flow 00 original.xlsx",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/Input%20and%20useage%20flow%2000%20original.xlsx",
     "size": 12211,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/Input%20and%20useage%20flow%2000%20original.xlsx"
+    "path": "docs/Input and useage flow 00 original.xlsx"
   },
   {
     "sha256": "e0a2e9649d02cbc6e4ba8720fdca4a90f2b9c67c1d427e6fe2e2c7af57c8fbf6",
-    "path": "docs/Input and useage flow 01.xlsx",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/Input%20and%20useage%20flow%2001.xlsx",
     "size": 19761,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/Input%20and%20useage%20flow%2001.xlsx"
+    "path": "docs/Input and useage flow 01.xlsx"
   },
   {
     "sha256": "2bf6511d02b1ad6930da2f39dc09f3f48b2d175a67d52bcc0c998207a92f0838",
-    "path": "docs/Input and useage flow 02.xlsx",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/Input%20and%20useage%20flow%2002.xlsx",
     "size": 21353,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/Input%20and%20useage%20flow%2002.xlsx"
+    "path": "docs/Input and useage flow 02.xlsx"
   },
   {
     "sha256": "6b46eea2b12108bb9d950bc2f4e7fce734de24f9b8e4f3d9fcbaaf606f57fb16",
-    "path": "docs/Markdown_chat_synopsis.md",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/Markdown_chat_synopsis.md",
     "size": 80043,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/Markdown_chat_synopsis.md"
+    "path": "docs/Markdown_chat_synopsis.md"
   },
   {
     "sha256": "c1e51c38410d2b8e4a70ad41e829e2bb0682fe211b318bf9f0ad225c11808f6f",
-    "path": "docs/mode_profile_master_template 02.xlsx",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/mode_profile_master_template%2002.xlsx",
     "size": 14760,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/mode_profile_master_template%2002.xlsx"
+    "path": "docs/mode_profile_master_template 02.xlsx"
   },
   {
     "sha256": "0971b05a5dffe730b272d8e4bcbe48201256963335414ee86cf1309ecabdf8e9",
-    "path": "docs/mode_profile_master_template.xlsx",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/mode_profile_master_template.xlsx",
     "size": 14756,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/mode_profile_master_template.xlsx"
+    "path": "docs/mode_profile_master_template.xlsx"
   },
   {
     "sha256": "e8f476e6f56a0ba65663dd2a16afab466eb479a90e79550a0d4873c3b07ca916",
-    "path": "docs/images/Figure 1 - setup_battery screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%201%20-%20setup_battery%20screen.png",
     "size": 6180,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%201%20-%20setup_battery%20screen.png"
+    "path": "docs/images/Figure 1 - setup_battery screen.png"
   },
   {
     "sha256": "218dbf539721926c3b5f4e4efe547d246f1061aaa69ccd65866b0976b1c2dd95",
-    "path": "docs/images/Figure 10 – setup_stomp_CC screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%2010%20–%20setup_stomp_CC%20screen.png",
     "size": 4679,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%2010%20–%20setup_stomp_CC%20screen.png"
+    "path": "docs/images/Figure 10 – setup_stomp_CC screen.png"
   },
   {
     "sha256": "2bbd1f0bb9d37d9fbb44425aa76597e3e93618cae9a23dbe511213675693b40a",
-    "path": "docs/images/Figure 10.2 – setup_stomp_CC_select screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%2010.2%20–%20setup_stomp_CC_select%20screen.png",
     "size": 5251,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%2010.2%20–%20setup_stomp_CC_select%20screen.png"
+    "path": "docs/images/Figure 10.2 – setup_stomp_CC_select screen.png"
   },
   {
     "sha256": "995b3e043b83a827ccc38b4e709a2f2f65018affd00e42827d875ea28a2e307f",
-    "path": "docs/images/Figure 10.3 – setup_STOMP_CC_select screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%2010.3%20–%20setup_STOMP_CC_select%20screen.png",
     "size": 4718,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%2010.3%20–%20setup_STOMP_CC_select%20screen.png"
+    "path": "docs/images/Figure 10.3 – setup_STOMP_CC_select screen.png"
   },
   {
     "sha256": "bfc21b8efca7aca4cad6dc419f707e2d26bd15fd19d0d9995b2b0e1a02b7d914",
-    "path": "docs/images/Figure 11 – setup_stomp_type screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%2011%20–%20setup_stomp_type%20screen.png",
     "size": 4760,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%2011%20–%20setup_stomp_type%20screen.png"
+    "path": "docs/images/Figure 11 – setup_stomp_type screen.png"
   },
   {
     "sha256": "630218fa0523efd45a341ce6e42d6d9d7f5aedb98a43e1a4e057705eb324f2fc",
-    "path": "docs/images/Figure 11.2 – setup_stomp_type_select screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%2011.2%20–%20setup_stomp_type_select%20screen.png",
     "size": 5260,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%2011.2%20–%20setup_stomp_type_select%20screen.png"
+    "path": "docs/images/Figure 11.2 – setup_stomp_type_select screen.png"
   },
   {
     "sha256": "3e5e2063548414bb7c153e280f1306667b07ac3dd466f19ef33a9a29e95647ef",
-    "path": "docs/images/Figure 11.3 – setup_STOMP_type_confirmation screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%2011.3%20–%20setup_STOMP_type_confirmation%20screen.png",
     "size": 4573,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%2011.3%20–%20setup_STOMP_type_confirmation%20screen.png"
+    "path": "docs/images/Figure 11.3 – setup_STOMP_type_confirmation screen.png"
   },
   {
     "sha256": "95d59a23d344c3b91c3882cd63d29262e0ae55cc143bdccd0022636bed06a2b5",
-    "path": "docs/images/Figure 2 – setup_led screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%202%20–%20setup_led%20screen.png",
     "size": 5350,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%202%20–%20setup_led%20screen.png"
+    "path": "docs/images/Figure 2 – setup_led screen.png"
   },
   {
     "sha256": "d4e1bd41cec7fc125283a81610c35d38d1ae67d7e4ce62315d6910eeeefe8bd8",
-    "path": "docs/images/Figure 2.2 – setup_LED brightness screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%202.2%20–%20setup_LED%20brightness%20screen.png",
     "size": 5213,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%202.2%20–%20setup_LED%20brightness%20screen.png"
+    "path": "docs/images/Figure 2.2 – setup_LED brightness screen.png"
   },
   {
     "sha256": "82cc67e85da99566738c748fe62368626770723e0671cb91fccbe5df7644d678",
-    "path": "docs/images/Figure 3 – setup_tft screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%203%20–%20setup_tft%20screen.png",
     "size": 4926,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%203%20–%20setup_tft%20screen.png"
+    "path": "docs/images/Figure 3 – setup_tft screen.png"
   },
   {
     "sha256": "942a4b68514fc93e7a7bb3cb0ec8f5584a2beed8efdc047fa240c6f9c149fd49",
-    "path": "docs/images/Figure 3.2 – setup_TFT brightness screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%203.2%20–%20setup_TFT%20brightness%20screen.png",
     "size": 5693,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%203.2%20–%20setup_TFT%20brightness%20screen.png"
+    "path": "docs/images/Figure 3.2 – setup_TFT brightness screen.png"
   },
   {
     "sha256": "3ff50034a26ab8f63e5ea5d9ef380763bbce5d2b3d2f32fe7bef14725d4d8f15",
-    "path": "docs/images/Figure 4 – setup_mode screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%204%20–%20setup_mode%20screen.png",
     "size": 4685,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%204%20–%20setup_mode%20screen.png"
+    "path": "docs/images/Figure 4 – setup_mode screen.png"
   },
   {
     "sha256": "72083f4292c75d81e38b07c9bd78bd64919146f66830f06cd8a3e5801437a94a",
-    "path": "docs/images/Figure 4.2 – setup_mode_select screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%204.2%20–%20setup_mode_select%20screen.png",
     "size": 4667,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%204.2%20–%20setup_mode_select%20screen.png"
+    "path": "docs/images/Figure 4.2 – setup_mode_select screen.png"
   },
   {
     "sha256": "a55c8f70f8e4cba1866b623d34ed62c5b096a5bdd317a2ed6e0764a90a6fea0e",
-    "path": "docs/images/Figure 5 – setup_mirror screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%205%20–%20setup_mirror%20screen.png",
     "size": 4828,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%205%20–%20setup_mirror%20screen.png"
+    "path": "docs/images/Figure 5 – setup_mirror screen.png"
   },
   {
     "sha256": "b4bb14e13bf5693581301be4f9d10f08d231f7d3531dbf1582b81ca89afd7418",
-    "path": "docs/images/Figure 5.2 – setup_mirror_select screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%205.2%20–%20setup_mirror_select%20screen.png",
     "size": 4868,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%205.2%20–%20setup_mirror_select%20screen.png"
+    "path": "docs/images/Figure 5.2 – setup_mirror_select screen.png"
   },
   {
     "sha256": "dedfc1b42c3ad9fbfbba2cda69b6d852faae6d2440607da131ed1e4dcd9c0840",
-    "path": "docs/images/Figure 6 – setup_MIDI_CH screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%206%20–%20setup_MIDI_CH%20screen.png",
     "size": 4116,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%206%20–%20setup_MIDI_CH%20screen.png"
+    "path": "docs/images/Figure 6 – setup_MIDI_CH screen.png"
   },
   {
     "sha256": "1b46ca9c768c576ad8ecc7c6626c14d1e93edcddcfb8f079b72b7b239498c267",
-    "path": "docs/images/Figure 6.2 – setup_MIDI_CH_select screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%206.2%20–%20setup_MIDI_CH_select%20screen.png",
     "size": 4429,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%206.2%20–%20setup_MIDI_CH_select%20screen.png"
+    "path": "docs/images/Figure 6.2 – setup_MIDI_CH_select screen.png"
   },
   {
     "sha256": "1f4a24c25808605970e4be524763f66e17cc9e52f45e61b76475279ab335e995",
-    "path": "docs/images/Figure 6.3 – setup_MIDI_CH_confirmation screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%206.3%20–%20setup_MIDI_CH_confirmation%20screen.png",
     "size": 4358,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%206.3%20–%20setup_MIDI_CH_confirmation%20screen.png"
+    "path": "docs/images/Figure 6.3 – setup_MIDI_CH_confirmation screen.png"
   },
   {
     "sha256": "e69a7ee121ceb7a7e7e8deb0cc905bbf434924e18e8d2a53549b595cfa181160",
-    "path": "docs/images/Figure 7 – setup_fader_labels screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%207%20–%20setup_fader_labels%20screen.png",
     "size": 4069,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%207%20–%20setup_fader_labels%20screen.png"
+    "path": "docs/images/Figure 7 – setup_fader_labels screen.png"
   },
   {
     "sha256": "e2975db2cf0f87ed71d01c9825c84e139a075c8256f24a46b3d3074c3bda34e5",
-    "path": "docs/images/Figure 7.2 – setup_fader_labels_select screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%207.2%20–%20setup_fader_labels_select%20screen.png",
     "size": 4237,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%207.2%20–%20setup_fader_labels_select%20screen.png"
+    "path": "docs/images/Figure 7.2 – setup_fader_labels_select screen.png"
   },
   {
     "sha256": "a4a0dc844f968b3f3c560794d5e0d0195c0c7695468cdf43a467eff998e695d6",
-    "path": "docs/images/Figure 7.3 – Setup_FADER_labels_list screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%207.3%20–%20Setup_FADER_labels_list%20screen.png",
     "size": 5069,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%207.3%20–%20Setup_FADER_labels_list%20screen.png"
+    "path": "docs/images/Figure 7.3 – Setup_FADER_labels_list screen.png"
   },
   {
     "sha256": "ff578ab6abf79108f47f68ec6b92865da16795f3dcfa6a887bf42143eff12b56",
-    "path": "docs/images/Figure 7.4 – Setup_FADER_labels_custom screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%207.4%20–%20Setup_FADER_labels_custom%20screen.png",
     "size": 3587,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%207.4%20–%20Setup_FADER_labels_custom%20screen.png"
+    "path": "docs/images/Figure 7.4 – Setup_FADER_labels_custom screen.png"
   },
   {
     "sha256": "ac6ea063755883063841c823394c38b2c367058002256546ee325ae4ced9470f",
-    "path": "docs/images/Figure 7.5 - Setup_FADER_labels_edit screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%207.5%20-%20Setup_FADER_labels_edit%20screen.png",
     "size": 4839,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%207.5%20-%20Setup_FADER_labels_edit%20screen.png"
+    "path": "docs/images/Figure 7.5 - Setup_FADER_labels_edit screen.png"
   },
   {
     "sha256": "3c67f271b72e8aed426febd9ce9d936b9be2efe70e0aa3ec15fc12545ba0b178",
-    "path": "docs/images/Figure 7.5 - Setup_STOMP_labels_edit screen .png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%207.5%20-%20Setup_STOMP_labels_edit%20screen%20.png",
     "size": 4943,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%207.5%20-%20Setup_STOMP_labels_edit%20screen%20.png"
+    "path": "docs/images/Figure 7.5 - Setup_STOMP_labels_edit screen .png"
   },
   {
     "sha256": "922e5a4172d3f4b3e67ada7b68b1a42489d9e69381ace87c8ffe05a9c49580a7",
-    "path": "docs/images/Figure 7.6 - Setup_FADER_labels_delete screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%207.6%20-%20Setup_FADER_labels_delete%20screen.png",
     "size": 3613,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%207.6%20-%20Setup_FADER_labels_delete%20screen.png"
+    "path": "docs/images/Figure 7.6 - Setup_FADER_labels_delete screen.png"
   },
   {
     "sha256": "28c089f5ee45cf593259f5fb1d6f506d2111f3a9810306256e29e571e8d9eafd",
-    "path": "docs/images/Figure 8 – setup_stomp_labels screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%208%20–%20setup_stomp_labels%20screen.png",
     "size": 4397,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%208%20–%20setup_stomp_labels%20screen.png"
+    "path": "docs/images/Figure 8 – setup_stomp_labels screen.png"
   },
   {
     "sha256": "b6289455e28fbedd3ba8428fd59eba62e39087f47719153526074b13f8e5897b",
-    "path": "docs/images/Figure 8.2 – setup_stomp_labels_select screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%208.2%20–%20setup_stomp_labels_select%20screen.png",
     "size": 4754,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%208.2%20–%20setup_stomp_labels_select%20screen.png"
+    "path": "docs/images/Figure 8.2 – setup_stomp_labels_select screen.png"
   },
   {
     "sha256": "817f2af2f0c9be664cc8f0b20ef4d2918f5cb050970de3cef3daa42ba65ebb41",
-    "path": "docs/images/Figure 8.3 – Setup_STOMP_labels_list screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%208.3%20–%20Setup_STOMP_labels_list%20screen.png",
     "size": 5422,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%208.3%20–%20Setup_STOMP_labels_list%20screen.png"
+    "path": "docs/images/Figure 8.3 – Setup_STOMP_labels_list screen.png"
   },
   {
     "sha256": "9d4d3b681dc042cd57561fc08e93629df027b1c03cd27c3de251739c1b8f172d",
-    "path": "docs/images/Figure 8.4 – Setup_STOMP_labels_custom screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%208.4%20–%20Setup_STOMP_labels_custom%20screen.png",
     "size": 3728,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%208.4%20–%20Setup_STOMP_labels_custom%20screen.png"
+    "path": "docs/images/Figure 8.4 – Setup_STOMP_labels_custom screen.png"
   },
   {
     "sha256": "922e5a4172d3f4b3e67ada7b68b1a42489d9e69381ace87c8ffe05a9c49580a7",
-    "path": "docs/images/Figure 8.6 - Setup_STOM_labels_delete screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%208.6%20-%20Setup_STOM_labels_delete%20screen.png",
     "size": 3613,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%208.6%20-%20Setup_STOM_labels_delete%20screen.png"
+    "path": "docs/images/Figure 8.6 - Setup_STOM_labels_delete screen.png"
   },
   {
     "sha256": "a5a2a7093dc895919b50c9bc6697ec2cef251e53f8f929dfed604bee6ff0df74",
-    "path": "docs/images/Figure 9 – setup_fader_CC screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%209%20–%20setup_fader_CC%20screen.png",
     "size": 4413,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%209%20–%20setup_fader_CC%20screen.png"
+    "path": "docs/images/Figure 9 – setup_fader_CC screen.png"
   },
   {
     "sha256": "e8b09f4bb7024dc02e6d4100753bb1463c18195434b7dfcd6784b636562fe5ac",
-    "path": "docs/images/Figure 9.2 – setup_fader_CC_select screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%209.2%20–%20setup_fader_CC_select%20screen.png",
     "size": 4981,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%209.2%20–%20setup_fader_CC_select%20screen.png"
+    "path": "docs/images/Figure 9.2 – setup_fader_CC_select screen.png"
   },
   {
     "sha256": "eb26ccd0d622d83e382bc89f8f0094840fc67537db252aa0945ee5849f95899e",
-    "path": "docs/images/Figure 9.3  - setup_FADER_CC_confirmation screen.png",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%209.3%20%20-%20setup_FADER_CC_confirmation%20screen.png",
     "size": 4480,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/docs/images/Figure%209.3%20%20-%20setup_FADER_CC_confirmation%20screen.png"
+    "path": "docs/images/Figure 9.3  - setup_FADER_CC_confirmation screen.png"
   },
   {
     "sha256": "38a3a1169f7b4bd1e7ef2f6d22aa39d9fb1527b82a807a4d7733c001971ce7a7",
-    "path": "fonts/OpenSans_Regular20pt7b.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/fonts/OpenSans_Regular20pt7b.h",
     "size": 37345,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/fonts/OpenSans_Regular20pt7b.h"
+    "path": "fonts/OpenSans_Regular20pt7b.h"
   },
   {
     "sha256": "e9bb7f173909cd1820a8feaa174ce5a72cad1ca1bf1c2587d77d4b2c0e466e14",
-    "path": "fonts/OpenSans_Regular24pt7b.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/fonts/OpenSans_Regular24pt7b.h",
     "size": 51769,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/fonts/OpenSans_Regular24pt7b.h"
+    "path": "fonts/OpenSans_Regular24pt7b.h"
   },
   {
     "sha256": "0aca40d86ddff87046a3808dff4f0fe7aff0d03b67909accda185e754f84d7cd",
-    "path": "fonts/OpenSans_SemiBold14pt7b.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/fonts/OpenSans_SemiBold14pt7b.h",
     "size": 21654,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/fonts/OpenSans_SemiBold14pt7b.h"
+    "path": "fonts/OpenSans_SemiBold14pt7b.h"
   },
   {
     "sha256": "b56f719593a9ba02dd4fcfcc79763bed4279d344a7cb85547cad251e259b5887",
-    "path": "fonts/OpenSans_SemiBold30pt7b.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/fonts/OpenSans_SemiBold30pt7b.h",
     "size": 82663,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/fonts/OpenSans_SemiBold30pt7b.h"
+    "path": "fonts/OpenSans_SemiBold30pt7b.h"
   },
   {
     "sha256": "c45d06d4d2a488574c40c5813e389f3b7178a1d66ca2370e8724d3cecd032f28",
-    "path": "src/display_module.cpp",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/display_module.cpp",
     "size": 601,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/display_module.cpp"
+    "path": "src/display_module.cpp"
   },
   {
     "sha256": "832ff2af78adde5b37c82bf2b0d7116ba74062f2a7e4141d74fb5f06ed159868",
-    "path": "src/display_module.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/display_module.h",
     "size": 316,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/display_module.h"
+    "path": "src/display_module.h"
   },
   {
     "sha256": "86c45fe962196cefeee6c0712329acbad69a5b4c75d271a7e9ed0056fbdabf29",
-    "path": "src/encoder_module.cpp",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/encoder_module.cpp",
     "size": 6020,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/encoder_module.cpp"
+    "path": "src/encoder_module.cpp"
   },
   {
     "sha256": "50ebe56487a689eeea6c952285fce5101a39a8dc2938f86d21983bfbcf0ba74e",
-    "path": "src/encoder_module.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/encoder_module.h",
     "size": 220,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/encoder_module.h"
+    "path": "src/encoder_module.h"
   },
   {
     "sha256": "d772f9357650f1006ebaf880d8ae25f2bd7c34c2b93aab001d82fea9878b2b12",
-    "path": "src/layout_constants.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/layout_constants.h",
     "size": 1197,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/layout_constants.h"
+    "path": "src/layout_constants.h"
   },
   {
-    "sha256": "b880ed89ea4fc242ba3850990e48bee0f19bbcb917d0e3c78e4e953ef0aed9a1",
-    "path": "src/mirror_module.cpp",
-    "size": 1486,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/mirror_module.cpp"
+    "sha256": "7d27f008aa7b1d6ab7554159226de5d629bb5747fee2b7e2923e355d035ff0f0",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/mirror_module.cpp",
+    "size": 2179,
+    "path": "src/mirror_module.cpp"
   },
   {
-    "sha256": "f1a0f4b75bde384b5807e0829352a352bef595a7204ca35a6acf5fb890fd921e",
-    "path": "src/mirror_module.h",
-    "size": 375,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/mirror_module.h"
+    "sha256": "1d45ceda8ecc3b48933316e6f5d449ef23ac6350c51068649ae26015dd823b8c",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/mirror_module.h",
+    "size": 348,
+    "path": "src/mirror_module.h"
   },
   {
     "sha256": "f0817b5de0f0374358b9bcdaba757d57adaa4499735d09292df2d54a318a8477",
-    "path": "src/mode_manager.cpp",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/mode_manager.cpp",
     "size": 583,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/mode_manager.cpp"
+    "path": "src/mode_manager.cpp"
   },
   {
     "sha256": "fb660fbe848eee95741f7a203015d27657a5517c7ec3bc0c64eded6a6973ec2e",
-    "path": "src/mode_manager.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/mode_manager.h",
     "size": 127,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/mode_manager.h"
+    "path": "src/mode_manager.h"
   },
   {
     "sha256": "7d8e9a284903cb4bde49582d20626a18890a7e5423555faeda1d5989eacb1f6e",
-    "path": "src/module_manager.cpp",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/module_manager.cpp",
     "size": 725,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/module_manager.cpp"
+    "path": "src/module_manager.cpp"
   },
   {
     "sha256": "18739eccea34cdf302d832e4f7a5c947ada5499fa47ca854a9e6963073a43ec1",
-    "path": "src/module_manager.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/module_manager.h",
     "size": 795,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/module_manager.h"
+    "path": "src/module_manager.h"
   },
   {
-    "sha256": "2cfd9d97aa8a5ec9752ad23c6d64b04250615fb2634db0b65edcb87af27cc10f",
-    "path": "src/mux_module.cpp",
-    "size": 2671,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/mux_module.cpp"
+    "sha256": "61194e35f5e2ee7ded035745dc1186fb9fb3015508e265e3ef4356203104e68a",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/mux_module.cpp",
+    "size": 4016,
+    "path": "src/mux_module.cpp"
   },
   {
-    "sha256": "42e1bfe9eb4c59a6101a7e698b32bdf6ee219172c28dca9aead9a3ffa867f0f6",
-    "path": "src/mux_module.h",
-    "size": 350,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/mux_module.h"
+    "sha256": "6d2333468bed7f5238102ab6ec56284c6e950cdb236cd45daed7b0a0ed774811",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/mux_module.h",
+    "size": 594,
+    "path": "src/mux_module.h"
   },
   {
-    "sha256": "747c61c82896cc5c5fba1a25d343698e2877ed6cb78b4e215f295a318b22ca04",
-    "path": "src/pinmap_module.cpp",
-    "size": 325,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/pinmap_module.cpp"
+    "sha256": "505e3268d39a02632a091e7f38363ee70c40c37a6cb589bef9c16d43d0db181d",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/pinmap_module.cpp",
+    "size": 989,
+    "path": "src/pinmap_module.cpp"
   },
   {
-    "sha256": "6f17bdf52176c01c51d4a21a17215910fe724284f9093a26cb1439b1e9eb4009",
-    "path": "src/pinmap_module.h",
-    "size": 1337,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/pinmap_module.h"
+    "sha256": "b0f020d209db24e8a57845a96fbb025591fe2aeb8a28ccb396aed4203a2505b0",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/pinmap_module.h",
+    "size": 2807,
+    "path": "src/pinmap_module.h"
   },
   {
     "sha256": "7b7286889722d35b17325746d7e9d70d84bd16c696b988ffab9ec58b9b5fe881",
-    "path": "src/play_module.cpp",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/play_module.cpp",
     "size": 798,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/play_module.cpp"
+    "path": "src/play_module.cpp"
   },
   {
     "sha256": "35787707f6f30c13e491c67b2a1ad748205d5d4aef6215a74f7165b9cab175a6",
-    "path": "src/play_module.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/play_module.h",
     "size": 102,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/play_module.h"
+    "path": "src/play_module.h"
   },
   {
     "sha256": "43c789c6d4b77b98c42f46cca8215e859b6af71b3964e078f2cec6602edde057",
-    "path": "src/settings_module.cpp",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/settings_module.cpp",
     "size": 16147,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/settings_module.cpp"
+    "path": "src/settings_module.cpp"
   },
   {
     "sha256": "1abfa2d2be3bee351e5169ca52e68937faca9d8dd99736f61cfe23f29ab1b3bc",
-    "path": "src/settings_module.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/settings_module.h",
     "size": 2353,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/settings_module.h"
+    "path": "src/settings_module.h"
   },
   {
-    "sha256": "7222fc10bb9f05f1809e22bae1602751cb623454eb1053667b377be4ca54147f",
-    "path": "src/setup_battery.cpp",
-    "size": 10419,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_battery.cpp"
+    "sha256": "22fb7b4a7479df17425258040abb0d2eb4bc02afe4d5ce149b053dbdb932c01d",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_battery.cpp",
+    "size": 8786,
+    "path": "src/setup_battery.cpp"
   },
   {
-    "sha256": "808e9ae14ed4a673acddb14c6da6e2e8b46f728977ecadf186952ec364788003",
-    "path": "src/setup_battery.h",
-    "size": 377,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_battery.h"
+    "sha256": "ef2f1529de7c81b34393e8effa8a070a377be59e9866541be16d25e1871e1db3",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_battery.h",
+    "size": 629,
+    "path": "src/setup_battery.h"
   },
   {
     "sha256": "0a4cc5e56c9fc62824913373ab6b7a287e445f943953cb87795ed65c13055248",
-    "path": "src/setup_fader_cc.cpp",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_fader_cc.cpp",
     "size": 18792,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_fader_cc.cpp"
+    "path": "src/setup_fader_cc.cpp"
   },
   {
     "sha256": "d9e55ab3f3a90eb95c1faa8e60a01772af6c4bf13dfb3b7d3ca6d7cc80187173",
-    "path": "src/setup_fader_cc.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_fader_cc.h",
     "size": 598,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_fader_cc.h"
+    "path": "src/setup_fader_cc.h"
   },
   {
     "sha256": "5bbc55992335f7da9a231c133bee0da911441681eb120ab521174fbae8061f71",
-    "path": "src/setup_led.cpp",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_led.cpp",
     "size": 6147,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_led.cpp"
+    "path": "src/setup_led.cpp"
   },
   {
     "sha256": "1d101801cc1c7a221289b0470e81786a199b35fae3337ba4d909625d7e7c09d8",
-    "path": "src/setup_led.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_led.h",
     "size": 396,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_led.h"
+    "path": "src/setup_led.h"
   },
   {
     "sha256": "d2c3a35365924fc675279e4f1c7f9673d779c9255f4f4e02fca7f3bd10f5c07e",
-    "path": "src/setup_midi_ch.cpp",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_midi_ch.cpp",
     "size": 14122,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_midi_ch.cpp"
+    "path": "src/setup_midi_ch.cpp"
   },
   {
     "sha256": "7ae65b68e531cd60072e0a2bf7d4b4748105b6e65e2f8c78e2acf831d72cda2e",
-    "path": "src/setup_midi_ch.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_midi_ch.h",
     "size": 585,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_midi_ch.h"
+    "path": "src/setup_midi_ch.h"
   },
   {
     "sha256": "6936de39297cb2ce206cc3f2bbb67c7ee697af49fa03ba2813d24f931e2c320c",
-    "path": "src/setup_mirror_delay.cpp",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_mirror_delay.cpp",
     "size": 10348,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_mirror_delay.cpp"
+    "path": "src/setup_mirror_delay.cpp"
   },
   {
     "sha256": "cbb257dc75f73099674c3b20a1784fe0915553c50970439c57a4d0d09a363a52",
-    "path": "src/setup_mirror_delay.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_mirror_delay.h",
     "size": 737,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_mirror_delay.h"
+    "path": "src/setup_mirror_delay.h"
   },
   {
     "sha256": "3aaa9a9433e44f75afa066dae47d41f5011392f00f5a7a2820e744b215862ac0",
-    "path": "src/setup_module.cpp",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_module.cpp",
     "size": 12263,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_module.cpp"
+    "path": "src/setup_module.cpp"
   },
   {
     "sha256": "e72957019ae18783dd2341b07e3e8555dffb7ebda50725fc991153b0aa30fb68",
-    "path": "src/setup_module.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_module.h",
     "size": 953,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_module.h"
+    "path": "src/setup_module.h"
   },
   {
     "sha256": "0337a7138a41c34768552e6d79948f2f75abf9c4da95f8f9f3b71c45cc423c4a",
-    "path": "src/setup_stomp_cc.cpp",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_stomp_cc.cpp",
     "size": 17642,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_stomp_cc.cpp"
+    "path": "src/setup_stomp_cc.cpp"
   },
   {
     "sha256": "278e368f0aa1ee7d6ff09d3cf4ace887e33f7a18be5e4572a617ea69fc687568",
-    "path": "src/setup_stomp_cc.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_stomp_cc.h",
     "size": 549,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_stomp_cc.h"
+    "path": "src/setup_stomp_cc.h"
   },
   {
     "sha256": "2b4600cd2b1e176e9cfb3d20e2bd11733d778b025b0f7d03979b3c0384d8e037",
-    "path": "src/setup_tft.cpp",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_tft.cpp",
     "size": 6012,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_tft.cpp"
+    "path": "src/setup_tft.cpp"
   },
   {
     "sha256": "e03c5d9f5672c580fa05dc195cc17c0e0ca01eab2f1e4b722d6ad94d9cbed2a0",
-    "path": "src/setup_tft.h",
+    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_tft.h",
     "size": 505,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/setup_tft.h"
-  },
-  {
-    "sha256": "8b8880956172f0fbe7b560b5fab159e47b418392eba2f50a6f85f3e97ea2a423",
-    "path": "src/src folder as of 19.08.25.zip",
-    "size": 47138,
-    "url": "https://raw.githubusercontent.com/snapperjonno/deep_control/main/src/src%20folder%20as%20of%2019.08.25.zip"
+    "path": "src/setup_tft.h"
   }
 ]
