@@ -1,45 +1,66 @@
-// File: mirror_module.cpp (updated)
+// =============================
+// File: src/mirror_module.cpp
+// =============================
 #include "mirror_module.h"
 #include <Arduino.h>
-#include "mux_module.h"     // needed for read_channel
+#include "mux_module.h"
 
-static const unsigned long LONG_PRESS_MS = 1000;
-static bool prev_state = false;
-static unsigned long press_time = 0;
-static bool long_press_detected = false;
-static bool long_press_consumed = false; // track if detection has been reported
+// Detect short/long presses on the logical "Mirror" input from the 4051.
+// NOTE: This now uses the logical map (MuxInput::Mirror) rather than a hardcoded channel.
 
+namespace {
+  static const unsigned long LONG_PRESS_MS = 1000; // 1s long press threshold
+  static bool prev_state = false;                  // last sampled level (active LOW via mux scanner)
+  static unsigned long press_time = 0;             // millis at press edge
+  static bool long_press_detected = false;         // latched when threshold crossed
+  static bool long_press_consumed = false;         // cleared by pressedLong()
+
+  inline bool mirror_now() {
+    // Read the logical Mirror input (active LOW inside mux_module)
+    return mux_module::read_input(mux_module::MuxInput::Mirror);
+  }
+}
 
 void mirror_module::begin() {
-  // Initialize previous state and reset flags
-  prev_state = mux_module::read_channel(1);
+  prev_state = mirror_now();
   long_press_detected = false;
   long_press_consumed = false;
+  press_time = 0;
 }
 
 void mirror_module::update() {
-  bool state = mux_module::read_channel(1);
-  unsigned long now = millis();
+  const bool state = mirror_now();
+  const unsigned long now = millis();
+
+  // Rising edge (pressed)
   if (state && !prev_state) {
-    // Button pressed: reset detection flags
     press_time = now;
     long_press_detected = false;
     long_press_consumed = false;
-  } else if (state && !long_press_detected && (now - press_time >= LONG_PRESS_MS)) {
-    // Long press detected once per press
-    long_press_detected = true;
-  } else if (!state && prev_state) {
-    // Button released
-    if (!long_press_detected) {
-      Serial.println("Mirror short press");
-    }
-    // no further action; flags will reset on next press
   }
+
+  // While held, mark a long press once
+  if (state && !long_press_detected) {
+    if (press_time && (now - press_time >= LONG_PRESS_MS)) {
+      long_press_detected = true;
+      // (No Serial print here by design; app layer may act on pressedLong())
+    }
+  }
+
+  // Falling edge (released)
+  if (!state && prev_state) {
+    if (!long_press_detected) {
+      // Debug-only: short press intent on Mirror button
+      Serial.println(F("Mirror short press"));
+    }
+    // If it was a long press, app can query pressedLong() once; we keep the flag
+    // until consumed by pressedLong().
+  }
+
   prev_state = state;
 }
 
 bool mirror_module::pressedLong() {
-  // Return and clear the long press detection once
   if (long_press_detected && !long_press_consumed) {
     long_press_consumed = true;
     return true;

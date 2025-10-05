@@ -9,6 +9,8 @@ void setup() {
   delay(200);
 
   settings_module::begin();   // <-- initialize NVS and load saved values (must be before any getters)
+  mux_module::begin();
+  mux_module::debug_scan_once();
   settings_module::dumpToSerial();
   display_module::earlyInit();
   module_manager::begin_all();

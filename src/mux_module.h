@@ -1,12 +1,26 @@
-// File: mux_module.h
-//
-// mux_module.h: Declares multiplexer module interface.
-// IMPORTANT: Do NOT modify this file.
+// =============================
+// File: src/mux_module.h
+// =============================
 #pragma once
 #include <Arduino.h>
 
 namespace mux_module {
-  void begin();    // Setup MUX pins
-  void update();   // Poll MUX and emit Serial events
-  bool read_channel(uint8_t ch);  // Public access for other modules
+  enum class MuxInput : uint8_t {
+    Stomp1,
+    Stomp2,
+    Stomp3,
+    Stomp4,
+    EncoderPush,
+    ToggleUp,
+    ToggleDown,
+    Mirror,
+    COUNT
+  };
+
+  void begin();
+  void update();
+
+  bool read_channel(uint8_t channel);  // raw physical (0..7), active LOW
+  bool read_input(MuxInput input);     // logical, preferred
+  void debug_scan_once();              // debug: print all 8 channel states (LOW=pressed)
 }

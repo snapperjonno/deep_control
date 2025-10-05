@@ -1,7 +1,6 @@
-// File: mirror_module.h
-//
-// mirror_module.h: Declares mirror module interface.
-// IMPORTANT: Do NOT modify this file.
+// =============================
+// File: src/mirror_module.h
+// =============================
 #pragma once
 
 namespace mirror_module {
